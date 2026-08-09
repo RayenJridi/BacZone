@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اللغة العربية باكالوريا تقنية — دروس وملخصات | BacZone</title>
+<meta name="description" content="دروس وملخصات في مادة اللغة العربية للباكالوريا التقنية في تونس.">
+<link rel="canonical" href="https://RayenJridi.github.io/BacZone/pages/arabe.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BacZone">
+<meta property="og:title" content="اللغة العربية باكالوريا تقنية — دروس وملخصات | BacZone">
+<meta property="og:description" content="دروس وملخصات في مادة اللغة العربية للباكالوريا التقنية في تونس.">
+<meta property="og:url" content="https://RayenJridi.github.io/BacZone/pages/arabe.html">
+<meta property="og:locale" content="fr_TN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="اللغة العربية باكالوريا تقنية — دروس وملخصات | BacZone">
+<meta name="twitter:description" content="دروس وملخصات في مادة اللغة العربية للباكالوريا التقنية في تونس.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Rayen Jridi">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">Bac<span>Zone</span></span>
+      <span class="tagline">Bac Technique · Tunisie</span>
+    </div>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <a href="../index.html">Accueil</a>
+      <a href="../matieres.html" class="active">Matières</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subject-hero" style="--accent:#B04A32">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="../matieres.html" class="active">Matières</a> / Arabe</div>
+    <h1>Arabe</h1>
+    <p>Rappels de cours, séries d'exercices et corrections pour réussir ta matière arabe.</p>
+  </div>
+</section>
+
+<div class="search-bar" style="--accent:#B04A32">
+  <div class="box">
+    <span class="ico">🔍</span>
+    <input type="text" id="searchInput" placeholder="Chercher un chapitre...">
+    <span class="search-count" id="searchCount"></span>
+  </div>
+</div>
+
+<div class="section-wrap" id="content-wrap">
+
+  <div class="section-block">
+    <h2><span class="n">📚</span> Cours</h2>
+    <ul class="res-list" style="--accent:#B04A32">
+      <li class="res-item" style="--i:0"><span class="label">عربية — عام كامل</span><a class="go" href="https://drive.google.com/file/d/10T2urLy2VN7ewM4QCW6UDxsfzRw4UHRm/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h2><span class="n">📝</span> Séries</h2>
+    <ul class="res-list" style="--accent:#B04A32">
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h2><span class="n">✅</span> Correction</h2>
+    <ul class="res-list" style="--accent:#B04A32">
+    </ul>
+  </div>
+
+  <p class="no-results" id="noResults">Aucun résultat pour cette recherche 🔍</p>
+
+</div>
+
+<footer class="site-footer">
+  2026 © BacZone — fait par <span>toi</span>, pour les élèves du Bac Technique.
+</footer>
+
+<script>
+  const input = document.getElementById('searchInput');
+  const count = document.getElementById('searchCount');
+  const chapters = document.querySelectorAll('#content-wrap .chapter');
+  const noResults = document.getElementById('noResults');
+  const totalItems = document.querySelectorAll('#content-wrap .res-item:not(.placeholder)').length;
+
+  function refreshCount(q, visibleItems){
+    count.textContent = q === '' ? (totalItems + ' fichiers') : (visibleItems + ' résultat(s)');
+  }
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visibleChapters = 0;
+    let visibleItems = 0;
+
+    chapters.forEach(ch => {
+      const chapterName = (ch.dataset.chapter || '').toLowerCase();
+      const matchChapter = chapterName.includes(q);
+      const items = ch.querySelectorAll('.res-item');
+      let anyItemVisible = false;
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const match = q === '' || matchChapter || text.includes(q);
+        item.style.display = match ? '' : 'none';
+        if (match) { anyItemVisible = true; visibleItems++; }
+      });
+
+      ch.style.display = anyItemVisible ? '' : 'none';
+      if (anyItemVisible) visibleChapters++;
+    });
+
+    noResults.classList.toggle('show', chapters.length > 0 && visibleChapters === 0 && q !== '');
+    refreshCount(q, visibleItems);
+  });
+
+  count.textContent = totalItems + ' fichiers';
+</script>
+
+</body>
+</html>

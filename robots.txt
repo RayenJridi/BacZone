@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://RayenJridi.github.io/BacZone/sitemap.xml

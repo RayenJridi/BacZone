@@ -2,6 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1P6622NPPH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1P6622NPPH');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mécanique Bac Technique — Cours, Séries & Corrections | BacZone</title>
 <meta name="description" content="Séries d'exercices et corrections en Mécanique pour le Bac Technique : dessin d'ensemble, guidage en rotation, torsion, transmission de puissance.">
@@ -53,229 +60,430 @@
   </div>
 </div>
 
+<div class="toolbar">
+  <button type="button" id="expandAllBtn">🔽 Ouvrir tout</button>
+  <button type="button" id="collapseAllBtn">🔼 Fermer tout</button>
+</div>
+
 <div class="section-wrap" id="content-wrap">
 
   <div class="section-block">
-    <h2><span class="n">📚</span> Cours</h2>
+    <h2><span class="n">📚</span> Cours <span class="count-badge"></span></h2>
     <ul class="res-list" style="--accent:#45795A">
     </ul>
   </div>
 
   <div class="section-block">
-    <h2><span class="n">📝</span> Séries</h2>
+    <h2><span class="n">📝</span> Séries <span class="count-badge"></span></h2>
 
-    <div class="chapter" data-chapter="lecture d'un dessin d'ensemble">
-      <h3>Lecture d'un dessin d'ensemble</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="lecture d'un dessin d'ensemble">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Lecture d'un dessin d'ensemble</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Série N°1</span><a class="go" href="https://drive.google.com/file/d/1jbP5fnTvIQRbGMOAhbAu4dvbfSk30PQ0/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Série N°2</span><a class="go" href="https://drive.google.com/file/d/1BQwuLSZuz3EQ7AqDXDiRdXRD5r65MkyE/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="analyse fonctionnelle interne">
-      <h3>Analyse fonctionnelle interne</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="analyse fonctionnelle interne">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Analyse fonctionnelle interne</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Analyse fonctionnelle interne</span><a class="go" href="https://drive.google.com/file/d/1x6BtptKjqIMDUISCYpYrCZgftT0IQvYB/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="embrayage et frein">
-      <h3>Embrayage et frein</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="embrayage et frein">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Embrayage et frein</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Série N°1</span><a class="go" href="https://drive.google.com/file/d/1iRn4QSsUp4BjiRIVSa7oxe-_XPiWzGEZ/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Série N°2</span><a class="go" href="https://drive.google.com/file/d/1Fsiq0fjD8KtoYKbM6wznNO5rDP4pCSQr/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="train">
-      <h3>Train</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="train">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Train</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Train</span><a class="go" href="https://drive.google.com/file/d/1_jt7rIgg260WeA59g4R-Kkk_LHjV6EJu/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="guidage en rotation">
-      <h3>Guidage en rotation</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="guidage en rotation">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Guidage en rotation</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Série N°1</span><a class="go" href="https://drive.google.com/file/d/1LLsccqX4OmpzKTMs_cwHCsq_4mD0F-eM/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Série N°2</span><a class="go" href="https://drive.google.com/file/d/14RlXnGPyQhv-mBzFo3eXBI4EeWONHw-i/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="obtention des pièces">
-      <h3>Obtention des pièces</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="obtention des pièces">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Obtention des pièces</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Obtention des pièces</span><a class="go" href="https://drive.google.com/file/d/14BF5B3m66Wl3F8B5sSk1rF5TWrjT0GkQ/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="la torsion simple">
-      <h3>La torsion simple</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="la torsion simple">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>La torsion simple</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">La torsion simple</span><a class="go" href="https://drive.google.com/file/d/1XC1awUeQJtsrQOo6DnIz1aPFslQljOe7/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="sollicitation composée torsion flexion">
-      <h3>Sollicitation composée (torsion + flexion)</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="sollicitation composée torsion flexion">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Sollicitation composée (torsion + flexion)</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Série N°1</span><a class="go" href="https://drive.google.com/file/d/1LMV1MLz2XT3mM0EEXZ8UKcjYtgHHaqvr/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Série N°2</span><a class="go" href="https://drive.google.com/file/d/1NydObSgD-fajcWU6Vbv7H5A2fmazcXZz/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="transmission de puissance avec transformation de mouvement">
-      <h3>Transmission de puissance avec transformation de mouvement</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="transmission de puissance avec transformation de mouvement">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Transmission de puissance avec transformation de mouvement</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Série N°1</span><a class="go" href="https://drive.google.com/file/d/1eblWPT5eqljcLRUhRadpoEvAFtDJSRgW/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Série N°2</span><a class="go" href="https://drive.google.com/file/d/1L1TDzzTVlBFgCDFDTF7S-3wQBjvGvgQ1/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:2"><span class="label">Série N°3</span><a class="go" href="https://drive.google.com/file/d/1jZdthSgGw24IQ-ZRfdF2p4i4NYMRQJEn/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="représentation d'un produit fini">
-      <h3>Représentation d'un produit fini</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="représentation d'un produit fini">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Représentation d'un produit fini</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Représentation d'un produit fini</span><a class="go" href="https://drive.google.com/file/d/1JVc9v7QXDAuNZ3rH1LrdC22P56gPxblq/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="la fonction assemblage">
-      <h3>La fonction assemblage</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="la fonction assemblage">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>La fonction assemblage</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">La fonction assemblage</span><a class="go" href="https://drive.google.com/file/d/19MRc0Dl5gC4lwlWmg_hvXoXQ5aa-j9qz/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="côté tolérancées et ajustements">
-      <h3>Côté tolérancées et ajustements</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="côté tolérancées et ajustements">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Côté tolérancées et ajustements</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Côté tolérancées et ajustements</span><a class="go" href="https://drive.google.com/file/d/194qQ2Al6gnHRiydeJIBK5sxp-VBoDkTc/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="cotation fonctionnelle">
-      <h3>Cotation fonctionnelle</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="cotation fonctionnelle">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Cotation fonctionnelle</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Cotation fonctionnelle</span><a class="go" href="https://drive.google.com/file/d/1DTlo5br9KQRjiT6PiPdZ4dB0kI1emZEz/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="accouplement et limiteur de couple">
-      <h3>Accouplement et limiteur de couple</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="accouplement et limiteur de couple">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Accouplement et limiteur de couple</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Accouplement et limiteur de couple</span><a class="go" href="https://drive.google.com/file/d/1E8-WjKmXvKOPXt3gp4uIZEGyz5YcCW-f/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
   </div>
 
   <div class="section-block">
-    <h2><span class="n">✅</span> Correction</h2>
+    <h2><span class="n">✅</span> Correction <span class="count-badge"></span></h2>
 
-    <div class="chapter" data-chapter="correction lecture d'un dessin d'ensemble">
-      <h3>Lecture d'un dessin d'ensemble</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction lecture d'un dessin d'ensemble">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Lecture d'un dessin d'ensemble</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé N°1</span><a class="go" href="https://drive.google.com/file/d/1A0YeIQhyddx-V-tLyip_MEFOKsYlX6wD/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Corrigé N°2</span><a class="go" href="https://drive.google.com/file/d/1jQYg5u7nNxOjWGEhcdKl22f4sp5dJ1ZJ/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction analyse fonctionnelle interne">
-      <h3>Analyse fonctionnelle interne</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction analyse fonctionnelle interne">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Analyse fonctionnelle interne</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Analyse fonctionnelle interne</span><a class="go" href="https://drive.google.com/file/d/1NkdQvN5k5JzZ327ki0y35VMIiaYV5a3G/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction embrayage et frein">
-      <h3>Embrayage et frein</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction embrayage et frein">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Embrayage et frein</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé N°1</span><a class="go" href="https://drive.google.com/file/d/1nrJFKmNHlAcYXrsxsk0W1T0GhlBmEh5g/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Corrigé N°2</span><a class="go" href="https://drive.google.com/file/d/1BwkVpwoIg9B4u98WaorYSfSPCYlFPeCl/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction train">
-      <h3>Train</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction train">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Train</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Train</span><a class="go" href="https://drive.google.com/file/d/1C4CRUQ4PTPyRCNJ4PGM_Go1XzHFjdq0A/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction guidage en rotation">
-      <h3>Guidage en rotation</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction guidage en rotation">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Guidage en rotation</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé N°1</span><a class="go" href="https://drive.google.com/file/d/1Oz-GnHU2R-ySWRkC17mbpM-vjR2jV_pe/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Corrigé N°2</span><a class="go" href="https://drive.google.com/file/d/1dR7u1K3045XdCOpL-LOHopgfQIi3LGYA/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction obtention des pièces">
-      <h3>Obtention des pièces</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction obtention des pièces">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Obtention des pièces</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Obtention des pièces</span><a class="go" href="https://drive.google.com/file/d/1yRNbR_VBh5cCRn1ym7ELeLFJBWx8U-91/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction torsion simple">
-      <h3>Torsion simple</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction torsion simple">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Torsion simple</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Torsion simple</span><a class="go" href="https://drive.google.com/file/d/1yVzpWrmScGNhndEiDUvQG8enYTYssPk-/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction sollicitation composée torsion flexion">
-      <h3>Sollicitation composée (torsion + flexion)</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction sollicitation composée torsion flexion">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Sollicitation composée (torsion + flexion)</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé N°1</span><a class="go" href="https://drive.google.com/file/d/1NzigE3CN_hwl3wYWqZa1MoyUXhp4q0mX/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Corrigé N°2</span><a class="go" href="https://drive.google.com/file/d/1s1NMUf8ddqVHUuFvdafAexzep6XF4A56/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:2"><span class="label">Corrigé N°3</span><a class="go" href="https://drive.google.com/file/d/1NIIy6RUhFvKECOqUtZgTFIwvH3I500C3/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction transmission de puissance avec transformation de mouvement">
-      <h3>Transmission de puissance avec transformation de mouvement</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction transmission de puissance avec transformation de mouvement">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Transmission de puissance avec transformation de mouvement</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé N°1</span><a class="go" href="https://drive.google.com/file/d/1tRmn81Ix6HvFpeGqyDC8QNIkAmUhCaoC/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:1"><span class="label">Corrigé N°2</span><a class="go" href="https://drive.google.com/file/d/1qZIS4k2Bp15fUti3nSGCTNOlOAYQiENb/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
         <li class="res-item" style="--i:2"><span class="label">Corrigé N°3</span><a class="go" href="https://drive.google.com/file/d/13PHigf_Wh0r-bVQybxpb4M7IHPv5sJjA/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction représentation d'un produit fini">
-      <h3>Représentation d'un produit fini</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction représentation d'un produit fini">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Représentation d'un produit fini</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Représentation d'un produit fini</span><a class="go" href="https://drive.google.com/file/d/1PgfTZTomqs3HVarZMH_o52A7Czdy_IJT/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction la fonction assemblage">
-      <h3>La fonction assemblage</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction la fonction assemblage">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>La fonction assemblage</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — La fonction assemblage</span><a class="go" href="https://drive.google.com/file/d/1YwbDS93N_zPdD5-vSj6A9CAecKUcRryn/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction côté tolérancées et ajustements">
-      <h3>Côté tolérancées et ajustements</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction côté tolérancées et ajustements">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Côté tolérancées et ajustements</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Côté tolérancées et ajustements</span><a class="go" href="https://drive.google.com/file/d/13Q9qszSFvV7CVTJ3atDzN49zyOq8fMdE/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction cotation fonctionnelle">
-      <h3>Cotation fonctionnelle</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction cotation fonctionnelle">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Cotation fonctionnelle</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Cotation fonctionnelle</span><a class="go" href="https://drive.google.com/file/d/11ngThp64zxk9Eu6RJN1QAgs01eIju8fU/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="chapter" data-chapter="correction accouplement et limiteur de couple">
-      <h3>Accouplement et limiteur de couple</h3>
-      <ul class="res-list" style="--accent:#45795A">
+    <div class="chapter collapsed" data-chapter="correction accouplement et limiteur de couple">
+      <button class="chapter-toggle" type="button" aria-expanded="false">
+        <h3>Accouplement et limiteur de couple</h3>
+        <span class="chevron">🔽</span>
+      </button>
+      <div class="chapter-panel">
+        <div class="chapter-panel-inner">
+          <ul class="res-list" style="--accent:#45795A">
         <li class="res-item" style="--i:0"><span class="label">Corrigé — Accouplement et limiteur de couple</span><a class="go" href="https://drive.google.com/file/d/1_0PTXwp8e4ceFBi6WPkarwozFHQtOwSA/view?usp=drivesdk" target="_blank" rel="noopener">PDF →</a></li>
       </ul>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -284,8 +492,12 @@
 
 </div>
 
+<div class="verse-box">
+  <p>وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ ۝ وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ 🤍</p>
+</div>
+
 <footer class="site-footer">
-  2026 © BacZone — fait par <span>toi</span>, pour les élèves du Bac Technique.
+  2026 © BacZone — fait par <span>Rayen Jridi</span>, pour les élèves du Bac Technique.
 </footer>
 
 <script>
@@ -294,34 +506,96 @@
   const chapters = document.querySelectorAll('#content-wrap .chapter');
   const noResults = document.getElementById('noResults');
   const totalItems = document.querySelectorAll('#content-wrap .res-item:not(.placeholder)').length;
+  const expandAllBtn = document.getElementById('expandAllBtn');
+  const collapseAllBtn = document.getElementById('collapseAllBtn');
 
+  // يشيل الحركات/الإكسنتات (é è ô ...) باش "controle" يلقى "Contrôle"
+  function norm(str){
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  }
+
+  // --- عداد كل قسم (📚 Cours (3)...) ---
+  document.querySelectorAll('#content-wrap .section-block').forEach(block => {
+    const n = block.querySelectorAll('.res-item:not(.placeholder)').length;
+    const badge = block.querySelector('h2 .count-badge');
+    if (badge) badge.textContent = n > 0 ? '(' + n + ')' : '';
+  });
+
+  // --- بادج "جديد" لمدة 30 يوم من تاريخ الإضافة ---
+  const NEW_DAYS = 30;
+  const now = new Date();
+  document.querySelectorAll('.res-item[data-added]').forEach(item => {
+    const added = new Date(item.dataset.added);
+    const days = (now - added) / (1000 * 60 * 60 * 24);
+    if (days >= 0 && days <= NEW_DAYS) item.classList.add('show-new');
+  });
+
+  // --- فتح/سكر فصل عند الضغط ---
+  document.querySelectorAll('.chapter-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const chapter = btn.closest('.chapter');
+      const isCollapsed = chapter.classList.toggle('collapsed');
+      btn.setAttribute('aria-expanded', String(!isCollapsed));
+    });
+  });
+
+  // --- فتح الكل / سكر الكل ---
+  if (expandAllBtn) expandAllBtn.addEventListener('click', () => {
+    chapters.forEach(ch => {
+      ch.classList.remove('collapsed');
+      const btn = ch.querySelector('.chapter-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    });
+  });
+  if (collapseAllBtn) collapseAllBtn.addEventListener('click', () => {
+    chapters.forEach(ch => {
+      ch.classList.add('collapsed');
+      const btn = ch.querySelector('.chapter-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // --- البحث: بلا ما يعطل الأكورديون، ويفتح تلقائي الفصول إلي فيها نتيجة ---
   input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
+    const q = norm(input.value.trim());
+    const keywords = q.split(/\s+/).filter(Boolean);
     let visibleChapters = 0;
     let visibleItems = 0;
 
     chapters.forEach(ch => {
-      const chapterName = (ch.dataset.chapter || '').toLowerCase();
-      const matchChapter = chapterName.includes(q);
+      const chapterName = norm(ch.dataset.chapter || '');
       const items = ch.querySelectorAll('.res-item');
+      const btn = ch.querySelector('.chapter-toggle');
       let anyItemVisible = false;
 
       items.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const match = q === '' || matchChapter || text.includes(q);
+        const text = norm(item.textContent);
+        const itemMatch = keywords.every(k => text.includes(k));
+        const chapterMatch = keywords.every(k => chapterName.includes(k));
+        const match = keywords.length === 0 || itemMatch || chapterMatch;
         item.style.display = match ? '' : 'none';
         if (match) { anyItemVisible = true; visibleItems++; }
       });
 
       ch.style.display = anyItemVisible ? '' : 'none';
       if (anyItemVisible) visibleChapters++;
+
+      if (q !== '' && anyItemVisible) {
+        // نتيجة بحث: افتح الفصل تلقائي
+        ch.classList.remove('collapsed');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      } else if (q === '') {
+        // البحث فارغ: ارجع للحالة الأصلية (مسكر)
+        ch.classList.add('collapsed');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
     });
 
     noResults.classList.toggle('show', chapters.length > 0 && visibleChapters === 0 && q !== '');
-    count.textContent = q === '' ? `${totalItems} fichiers` : `${visibleItems} résultat(s)`;
+    count.textContent = q === '' ? (totalItems + ' fichiers') : (visibleItems + ' résultat(s)');
   });
 
-  count.textContent = `${totalItems} fichiers`;
+  count.textContent = totalItems + ' fichiers';
 </script>
 
 </body>

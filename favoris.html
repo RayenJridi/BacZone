@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1P6622NPPH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1P6622NPPH');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المفضلة — BacZone</title>
+<meta name="description" content="الدروس والسلاسل والفيديوهات اللي حفظتهم في BacZone، توصلهم بسرعة بلا ما تبحث من جديد.">
+<link rel="canonical" href="https://RayenJridi.github.io/BacZone/favoris.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
+<link rel="manifest" href="/BacZone/manifest.json">
+<meta name="theme-color" content="#161A2B">
+<link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
+<meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">Bac<span>Zone</span></span>
+      <span class="tagline">Bac Technique · تونس</span>
+    </div>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="matieres.html">المواد</a>
+      <a href="favoris.html" class="active">⭐ المفضلة</a>
+      <a href="contact.html">تواصل معنا</a>
+    </nav>
+  </div>
+</header>
+
+<section class="intro-hero" style="padding:50px 24px 38px;">
+  <div class="avatar-badge">⭐ المفضلة</div>
+  <h1>الحاجات اللي حفظتهم</h1>
+  <p class="sign" style="color:#B9BEDA; font-weight:500;">توصل لهم بسرعة بلا ما تبحث من جديد. محفوظين في هاذ الجهاز فقط.</p>
+</section>
+
+<div class="fav-list" id="favList">
+  <!-- يتعمر بـ JS -->
+</div>
+
+<div class="verse-box">
+  <p>وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ ۝ وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ 🤍</p>
+</div>
+
+<footer class="site-footer">
+  2026 © BacZone — فكرة وتصميم <span>Rayen Jridi</span> · نتعلم، نشارك، ونتقدم معًا 🇹🇳
+</footer>
+
+<div class="pwa-banner" id="pwaInstallBanner">
+  <div class="txt">
+    <strong>📱 ثبّت BacZone على هاتفك</strong>
+    توصل للموقع بسرعة من الشاشة الرئيسية، حتى بلا ما تفتح المتصفح.
+  </div>
+  <button type="button" id="pwaInstallBtn">تثبيت</button>
+  <button type="button" id="pwaDismissBtn">✕</button>
+</div>
+
+<script src="app.js"></script>
+<script>
+  function renderFavorites() {
+    const list = window.BacZoneFav.getFavorites();
+    const wrap = document.getElementById('favList');
+
+    if (list.length === 0) {
+      wrap.innerHTML = `
+        <div class="fav-empty">
+          <div class="big">⭐</div>
+          <p>مازلت ما حفظتش شي حاجة.<br>افتح أي مادة واضغط على ☆ بجانب أي درس أو فيديو باش يتزاد هنا.</p>
+        </div>`;
+      return;
+    }
+
+    wrap.innerHTML = list.map((item, idx) => `
+      <div class="fav-card" data-id="${idx}">
+        <div class="info">
+          <div class="t">${item.title}</div>
+          <div class="s">${item.subject || ''}</div>
+        </div>
+        <div class="actions">
+          <a href="${item.url}" target="_blank" rel="noopener">فتح ↗</a>
+          <button type="button" class="fav-remove" data-remove-id="${item.id}">حذف 🗑</button>
+        </div>
+      </div>
+    `).join('');
+
+    wrap.querySelectorAll('.fav-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.BacZoneFav.toggleFavorite({ id: btn.dataset.removeId });
+        renderFavorites();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', renderFavorites);
+</script>
+
+</body>
+</html>

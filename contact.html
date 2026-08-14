@@ -13,7 +13,12 @@
 <title>تواصل معنا — BacZone</title>
 <meta name="description" content="تواصل مع فريق BacZone لمشاركة دروس أو سلاسل تمارين تفيد تلاميذ الباكالوريا التقنية في تونس.">
 <link rel="canonical" href="https://RayenJridi.github.io/BacZone/contact.html">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
+<link rel="manifest" href="/BacZone/manifest.json">
+<meta name="theme-color" content="#161A2B">
+<link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BacZone">
 <meta property="og:title" content="تواصل معنا — BacZone">
@@ -39,6 +44,7 @@
     <nav>
       <a href="index.html">الرئيسية</a>
       <a href="matieres.html">المواد</a>
+      <a href="/BacZone/favoris.html">⭐ المفضلة</a>
       <a href="contact.html" class="active">تواصل معنا</a>
     </nav>
   </div>
@@ -56,9 +62,48 @@
     <span class="icon">📘</span>
     <h3>Facebook</h3>
     <div class="value">Ryn Jridi</div><br>
-    <a class="btn btn-primary" href="https://www.facebook.com/search/top/?q=Ryn%20Jridi" target="_blank" rel="noopener">افتح فيسبوك</a>
+    <a class="btn btn-primary" href="https://www.facebook.com/ryn.jridi" target="_blank" rel="noopener">افتح فيسبوك</a>
   </div>
 
+</div>
+
+<div class="contact-form-wrap">
+  <form class="contact-form" id="baczoneContactForm">
+    <h2>📮 راسلنا مباشرة</h2>
+    <p class="sub">عبّي الفورم وتوصلني الرسالة على الإيميل مباشرة — طلب دعم، اقتراح محتوى، ولا أي حاجة أخرى.</p>
+
+    <input type="hidden" name="access_key" value="8021561f-7df7-4af1-ba4b-fe6c0638589e">
+    <input type="hidden" name="subject" value="رسالة جديدة من موقع BacZone">
+    <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off">
+
+    <div class="form-row">
+      <label for="cf-name">الاسم</label>
+      <input type="text" id="cf-name" name="name" required placeholder="اسمك">
+    </div>
+
+    <div class="form-row">
+      <label for="cf-email">البريد الإلكتروني (باش نرجعلك الجواب)</label>
+      <input type="email" id="cf-email" name="email" required placeholder="example@gmail.com">
+    </div>
+
+    <div class="form-row">
+      <label for="cf-type">نوع الرسالة</label>
+      <select id="cf-type" name="type">
+        <option value="دعم فني">🛠️ دعم فني — مشكلة في الموقع</option>
+        <option value="اقتراح محتوى">📚 اقتراح / مشاركة Cours أو Série</option>
+        <option value="أخرى">💬 حاجة أخرى</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="cf-message">الرسالة</label>
+      <textarea id="cf-message" name="message" required placeholder="اكتب رسالتك هنا..."></textarea>
+    </div>
+
+    <button type="submit" id="cf-submit">إرسال الرسالة 🚀</button>
+
+    <div class="form-status" id="cf-status"></div>
+  </form>
 </div>
 
 <div class="verse-box">
@@ -68,6 +113,53 @@
 <footer class="site-footer">
   2026 © BacZone — فكرة وتصميم <span>Rayen Jridi</span> · نتعلم، نشارك، ونتقدم معًا 🇹🇳
 </footer>
+
+<script>
+  const cfForm = document.getElementById('baczoneContactForm');
+  const cfStatus = document.getElementById('cf-status');
+  const cfSubmit = document.getElementById('cf-submit');
+
+  cfForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    cfSubmit.disabled = true;
+    cfSubmit.textContent = 'جاري الإرسال...';
+    cfStatus.className = 'form-status';
+
+    const formData = new FormData(cfForm);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        cfStatus.textContent = '✅ تم إرسال رسالتك بنجاح! نرجعلك بسرعة.';
+        cfStatus.classList.add('ok', 'show');
+        cfForm.reset();
+      } else {
+        throw new Error(data.message || 'خطأ');
+      }
+    } catch (err) {
+      cfStatus.textContent = '❌ صار خطأ، جرب مرة أخرى ولا راسلنا مباشرة على فيسبوك.';
+      cfStatus.classList.add('err', 'show');
+    } finally {
+      cfSubmit.disabled = false;
+      cfSubmit.textContent = 'إرسال الرسالة 🚀';
+    }
+  });
+</script>
+
+<div class="pwa-banner" id="pwaInstallBanner">
+  <div class="txt">
+    <strong>📱 ثبّت BacZone على هاتفك</strong>
+    توصل للموقع بسرعة من الشاشة الرئيسية، حتى بلا ما تفتح المتصفح.
+  </div>
+  <button type="button" id="pwaInstallBtn">تثبيت</button>
+  <button type="button" id="pwaDismissBtn">✕</button>
+</div>
+
+<script src="app.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,12 @@
 <title>BacZone — منصة موارد الباكالوريا التقنية في تونس</title>
 <meta name="description" content="BacZone منصة مجانية تجمع دروس وسلاسل تمارين وتصحيحات لجميع مواد الباكالوريا التقنية (Bac Technique) في تونس: رياضيات، فيزياء، هندسة كهربائية، ميكانيك، عربية، فرنسية، إنجليزية وفلسفة.">
 <link rel="canonical" href="https://RayenJridi.github.io/BacZone/index.html">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
+<link rel="manifest" href="/BacZone/manifest.json">
+<meta name="theme-color" content="#161A2B">
+<link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BacZone">
 <meta property="og:title" content="BacZone — منصة موارد الباكالوريا التقنية في تونس">
@@ -53,6 +58,7 @@
     <nav>
       <a href="index.html" class="active">الرئيسية</a>
       <a href="matieres.html">المواد</a>
+      <a href="/BacZone/favoris.html">⭐ المفضلة</a>
       <a href="contact.html">تواصل معنا</a>
     </nav>
   </div>
@@ -115,6 +121,17 @@
 <footer class="site-footer">
   2026 © BacZone — فكرة وتصميم <span>Rayen Jridi</span> · نتعلم، نشارك، ونتقدم معًا 🇹🇳
 </footer>
+
+<div class="pwa-banner" id="pwaInstallBanner">
+  <div class="txt">
+    <strong>📱 ثبّت BacZone على هاتفك</strong>
+    توصل للموقع بسرعة من الشاشة الرئيسية، حتى بلا ما تفتح المتصفح.
+  </div>
+  <button type="button" id="pwaInstallBtn">تثبيت</button>
+  <button type="button" id="pwaDismissBtn">✕</button>
+</div>
+
+<script src="app.js"></script>
 
 </body>
 </html>

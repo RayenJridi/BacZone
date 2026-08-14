@@ -25,18 +25,23 @@
     deferredPrompt = e;
     const banner = document.getElementById("pwaInstallBanner");
     if (banner) banner.classList.add("show");
+    const navBtn = document.getElementById("navInstallBtn");
+    if (navBtn) navBtn.classList.add("show");
   });
 
   window.addEventListener("appinstalled", () => {
     deferredPrompt = null;
     const banner = document.getElementById("pwaInstallBanner");
     if (banner) banner.classList.remove("show");
+    const navBtn = document.getElementById("navInstallBtn");
+    if (navBtn) navBtn.classList.remove("show");
   });
 
   document.addEventListener("DOMContentLoaded", () => {
     const installBtn = document.getElementById("pwaInstallBtn");
     const dismissBtn = document.getElementById("pwaDismissBtn");
     const banner = document.getElementById("pwaInstallBanner");
+    const navBtn = document.getElementById("navInstallBtn");
 
     if (installBtn) {
       installBtn.addEventListener("click", async () => {
@@ -45,6 +50,16 @@
         await deferredPrompt.userChoice;
         deferredPrompt = null;
         if (banner) banner.classList.remove("show");
+        if (navBtn) navBtn.classList.remove("show");
+      });
+    }
+    if (navBtn) {
+      navBtn.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        navBtn.classList.remove("show");
       });
     }
     if (dismissBtn) {

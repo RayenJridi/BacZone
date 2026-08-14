@@ -10,6 +10,43 @@
   "use strict";
 
   const FAV_KEY = "baczone_favorites_v1";
+  const THEME_KEY = "baczone_theme"; // "light" | "dark" | absent = يتبع النظام
+
+  // ---------- 0) Theme toggle (التطبيق المبكر قبل الرسم موجود في <head> كل صفحة) ----------
+  function systemPrefersDark() {
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    const btn = document.getElementById("themeToggleBtn");
+    if (btn) btn.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+
+  function getStoredTheme() {
+    return localStorage.getItem(THEME_KEY);
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      if (!getStoredTheme()) applyTheme(e.matches ? "dark" : "light");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("themeToggleBtn");
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+    if (btn) btn.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const current = document.documentElement.getAttribute("data-theme") || "light";
+        const next = current === "dark" ? "light" : "dark";
+        localStorage.setItem(THEME_KEY, next);
+        applyTheme(next);
+      });
+    }
+  });
 
   // ---------- 1) Service Worker ----------
   if ("serviceWorker" in navigator) {
@@ -148,8 +185,72 @@
     });
   }
 
+  // ---------- 4) شنوّة الجديد (Quoi de neuf) ----------
+  // قائمة مركزية بآخر التحديثات — نزيدها إحنا يدوي كل مرة نزيد محتوى.
+  // "date" = آخر تاريخ تحديث في هاذ الدفعة، يتحسب مع آخر تاريخ شافو الطالب.
+  const WHATS_NEW = [
+    {
+      date: "2026-08-14",
+      items: [
+        "🌙 وضع ليلي/نهاري جديد (Dark Mode) — بدلو من فوق يمين",
+        "⭐ نظام المفضلة (Favoris) — احفظ أي درس ورجعلو بسرعة",
+        "📱 تثبيت BacZone على الشاشة الرئيسية للهاتف",
+      ],
+    },
+    {
+      date: "2026-08-12",
+      items: [
+        "📚 دروس جديدة في Arabe (5 ملفات) و Français (Grammaire)",
+        "📄 قسم Sujet Bac جديد في Physique — 24 سؤال مصحح",
+      ],
+    },
+    {
+      date: "2026-08-11",
+      items: [
+        "🎬 أكثر من 100 فيديو جديدة في Mathématiques و Génie Électrique",
+        "📄 قسم Devoir BAC في Mathématiques — مواضيع من 2019 لـ2026",
+      ],
+    },
+  ];
+
+  function renderWhatsNew() {
+    const banner = document.getElementById("whatsNewBanner");
+    if (!banner) return;
+
+    const SEEN_KEY = "baczone_whatsnew_seen";
+    const lastSeen = localStorage.getItem(SEEN_KEY) || "2000-01-01";
+    const fresh = WHATS_NEW.filter((batch) => batch.date > lastSeen);
+
+    if (fresh.length === 0) return; // ما فماش جديد من آخر زيارة
+
+    const list = fresh
+      .flatMap((batch) => batch.items)
+      .slice(0, 5)
+      .map((t) => `<li>${t}</li>`)
+      .join("");
+
+    banner.innerHTML = `
+      <div class="wn-inner">
+        <div class="wn-head">
+          <span class="wn-badge">🔔 شنوّة الجديد</span>
+          <button type="button" class="wn-close" id="wnCloseBtn" aria-label="سكر">✕</button>
+        </div>
+        <ul class="wn-list">${list}</ul>
+      </div>`;
+    banner.classList.add("show");
+
+    document.getElementById("wnCloseBtn").addEventListener("click", () => {
+      localStorage.setItem(SEEN_KEY, WHATS_NEW[0].date);
+      banner.classList.remove("show");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", renderWhatsNew);
+
   document.addEventListener("DOMContentLoaded", injectStarButtons);
 
   // نعرضها عالميا باش صفحة favoris.html تنجم تستعملها
   window.BacZoneFav = { getFavorites, saveFavorites, toggleFavorite, isFavorited };
 })();
+
+

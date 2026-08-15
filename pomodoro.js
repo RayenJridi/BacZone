@@ -117,20 +117,36 @@
           await Notification.requestPermission();
         }
         updateNotifBtnUI();
+        if (Notification.permission === "granted") {
+          showNotification("🍅 BacZone", "التنبيهات خدامة! تبان لك كي تبدا جلسة.");
+        }
       });
     }
 
     function showNotification(title, body, opts) {
-      if (!notifSupported() || Notification.permission !== "granted") return null;
-      try {
-        return new Notification(title, Object.assign({
-          body,
-          tag: NOTIF_TAG,
-          renotify: true,
-          icon: "/BacZone/icons/icon-192.png",
-          badge: "/BacZone/icons/icon-192.png",
-        }, opts || {}));
-      } catch (e) { return null; }
+      if (!notifSupported() || Notification.permission !== "granted") return;
+
+      const payload = Object.assign({
+        body,
+        tag: NOTIF_TAG,
+        renotify: true,
+        icon: "/BacZone/icons/icon-192.png",
+        badge: "/BacZone/icons/icon-192.png",
+        vibrate: [150, 60, 150],
+      }, opts || {});
+
+      // أندرويد Chrome ما يخدمش بيه "new Notification()" المباشرة كي يكون
+      // فما Service Worker مسجّل — لازم يعدي عبر الـService Worker (registration.showNotification).
+      // نجربو الطريقة هاذي أول، وإلا نرجعو للطريقة العادية (تخدم على Desktop/iOS).
+      if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+        navigator.serviceWorker.ready
+          .then((reg) => reg.showNotification(title, payload))
+          .catch(() => {
+            try { new Notification(title, payload); } catch (e) {}
+          });
+      } else {
+        try { new Notification(title, payload); } catch (e) {}
+      }
     }
 
     function updateNotifNow() {

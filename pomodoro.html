@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script>try{var t=localStorage.getItem('baczone_theme');var d=t?t==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1P6622NPPH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1P6622NPPH');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pomodoro — BacZone</title>
+<meta name="description" content="تايمر بومودورو مربوط بمواد الباكالوريا التقنية — ركّز 25 دقيقة، راقب وقت المراجعة تاعك يوم بيوم، بلا تسجيل وبلا إنترنت.">
+<link rel="canonical" href="https://RayenJridi.github.io/BacZone/pomodoro.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
+<link rel="manifest" href="/BacZone/manifest.json">
+<meta name="theme-color" content="#161A2B">
+<link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">Bac<span>Zone</span></span>
+      <span class="tagline">Bac Technique · تونس</span>
+    </div>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="matieres.html">المواد</a>
+      <a href="pomodoro.html" class="active">🍅 Pomodoro</a>
+      <a href="favoris.html">⭐ المفضلة</a>
+      <a href="contact.html">تواصل معنا</a>
+      <button type="button" class="nav-install-btn" id="navInstallBtn">📲 تثبيت</button>
+      <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="بدل الوضع الداكن/الفاتح" title="بدل الوضع الداكن/الفاتح">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wn-banner" id="whatsNewBanner"></div>
+
+<section class="intro-hero" style="padding:44px 24px 34px;">
+  <div class="avatar-badge">🍅 Pomodoro</div>
+  <h1>ركّز، راجع، تقدّم</h1>
+  <p class="sign" style="color:#B9BEDA; font-weight:500;">25 دقيقة تركيز، 5 دقايق راحة — كل جلسة تتسجل بروحها.</p>
+</section>
+
+<div class="pomo-wrap">
+
+  <!-- Timer -->
+  <div class="pomo-card">
+    <div class="pomo-tabs">
+      <button type="button" id="pmTabPomo" class="active">🍅 Pomodoro</button>
+      <button type="button" id="pmTabPause">☕ Pause</button>
+    </div>
+
+    <div class="pomo-ring-wrap">
+      <div class="pomo-ring">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle class="bg" cx="110" cy="110" r="100"></circle>
+          <circle class="fg" id="pmRingFg" cx="110" cy="110" r="100"></circle>
+        </svg>
+        <div class="txt">
+          <div class="time" id="pmTime">25:00</div>
+          <div class="label" id="pmLabel">Pomodoro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pomo-controls">
+      <button type="button" class="pm-reset" id="pmReset">↺ Reset</button>
+      <button type="button" class="pm-start" id="pmStart">▶ Start</button>
+    </div>
+
+    <div class="pomo-duration">
+      <span>⏱ مدة الجلسة</span>
+      <select id="pmDurationSelect">
+        <option value="15">15 دقيقة</option>
+        <option value="25" selected>25 دقيقة</option>
+        <option value="45">45 دقيقة</option>
+        <option value="60">60 دقيقة</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Aperçu du jour -->
+  <div class="pomo-card">
+    <h2>📊 نظرة على اليوم</h2>
+    <div class="pomo-stats">
+      <div class="pomo-stat"><span class="ic">🍅</span><div><div class="n" id="pmStatSessions">0</div><div class="l">جلسات اليوم</div></div></div>
+      <div class="pomo-stat"><span class="ic">⏰</span><div><div class="n" id="pmStatTime">0m</div><div class="l">وقت المراجعة اليوم</div></div></div>
+      <div class="pomo-stat"><span class="ic">🔥</span><div><div class="n" id="pmStatStreak">0</div><div class="l">أيام متتالية</div></div></div>
+      <div class="pomo-stat"><span class="ic">🏆</span><div><div class="n" id="pmStatTotal">0</div><div class="l">مجموع الجلسات</div></div></div>
+    </div>
+  </div>
+
+  <!-- New session -->
+  <div class="pomo-card">
+    <h2>📚 جلسة جديدة — اختار المادة</h2>
+    <div class="pomo-subjects" id="pmSubjects"></div>
+    <textarea class="pomo-note" id="pmNote" maxlength="100" placeholder="شنوة باش تراجع؟ (اختياري)"></textarea>
+  </div>
+
+  <!-- Today's sessions -->
+  <div class="pomo-card">
+    <h2>📝 جلسات اليوم</h2>
+    <div id="pmSessionList"></div>
+  </div>
+
+  <!-- Weekly chart -->
+  <div class="pomo-card">
+    <h2>📈 وقت المراجعة (هاذ الأسبوع)</h2>
+    <div class="pomo-chart" id="pmChart"></div>
+  </div>
+
+  <div class="pomo-quote" id="pmQuote"></div>
+
+  <div class="pomo-tip">
+    💡 <span>نصيحة: راجع 25 دقيقة بتركيز كامل، بعدها خذ 5 دقايق راحة. بعد 4 جلسات، خذ راحة طويلة 15-30 دقيقة.</span>
+  </div>
+
+</div>
+
+<div class="verse-box">
+  <p>وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ ۝ وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ 🤍</p>
+</div>
+
+<footer class="site-footer">
+  2026 © BacZone — فكرة وتصميم <span>Rayen Jridi</span> · نتعلم، نشارك، ونتقدم معًا 🇹🇳
+</footer>
+
+<div class="pwa-banner" id="pwaInstallBanner">
+  <div class="txt">
+    <strong>📱 ثبّت BacZone على هاتفك</strong>
+    توصل للموقع بسرعة من الشاشة الرئيسية، حتى بلا ما تفتح المتصفح.
+  </div>
+  <button type="button" id="pwaInstallBtn">تثبيت</button>
+  <button type="button" id="pwaDismissBtn">✕</button>
+</div>
+
+<script src="app.js"></script>
+<script src="pomodoro.js"></script>
+
+</body>
+</html>

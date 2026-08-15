@@ -799,6 +799,199 @@ img{max-width:100%;}
 .fav-card .actions a{color:var(--gold); border-color:var(--gold);}
 .fav-card .actions button:hover{background:#FCE9DE; border-color:#B6431F; color:#B6431F;}
 
+/* ---------- Pomodoro ---------- */
+.pomo-wrap{
+  max-width:640px;
+  margin:0 auto;
+  padding:20px 24px 60px;
+  display:grid;
+  gap:18px;
+}
+.pomo-card{
+  background:var(--surface);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px 20px;
+}
+.pomo-card h2{
+  font-family:'Tajawal', sans-serif;
+  font-size:1.05rem;
+  font-weight:800;
+  margin:0 0 16px;
+  color:var(--ink);
+  display:flex; align-items:center; gap:8px;
+}
+
+/* tabs Pomodoro / Pause */
+.pomo-tabs{
+  display:flex;
+  background:var(--paper);
+  border-radius:20px;
+  padding:4px;
+  gap:4px;
+  margin-bottom:24px;
+}
+.pomo-tabs button{
+  flex:1;
+  border:none; background:none;
+  padding:9px 10px;
+  border-radius:16px;
+  font-family:'Tajawal', sans-serif;
+  font-weight:700;
+  font-size:.85rem;
+  color:var(--ink-soft);
+  cursor:pointer;
+  transition:background .15s, color .15s;
+}
+.pomo-tabs button.active{
+  background:var(--surface);
+  color:var(--ink);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* ring */
+.pomo-ring-wrap{
+  display:flex; justify-content:center; margin-bottom:20px;
+}
+.pomo-ring{ position:relative; width:220px; height:220px; }
+.pomo-ring svg{ transform:rotate(-90deg); }
+.pomo-ring circle{ fill:none; stroke-width:10; }
+.pomo-ring .bg{ stroke:var(--paper-line); }
+.pomo-ring .fg{ stroke:var(--gold); stroke-linecap:round; transition:stroke-dashoffset 1s linear; }
+.pomo-ring .txt{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.pomo-ring .time{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:2.6rem; font-weight:700;
+  color:var(--ink);
+}
+.pomo-ring .label{
+  font-size:.78rem; color:var(--ink-soft);
+  background:var(--paper); padding:3px 12px; border-radius:12px; margin-top:6px;
+}
+
+.pomo-controls{ display:flex; justify-content:center; gap:10px; margin-bottom:18px; }
+.pomo-controls button{
+  border:none; border-radius:20px;
+  padding:11px 22px;
+  font-family:'Tajawal', sans-serif;
+  font-weight:700; font-size:.88rem;
+  cursor:pointer;
+  display:flex; align-items:center; gap:6px;
+}
+.pomo-controls .pm-reset{background:var(--paper); color:var(--ink-soft); border:1px solid var(--paper-line) !important;}
+.pomo-controls .pm-start{background:var(--gold); color:var(--ink);}
+.pomo-controls .pm-start.running{background:#DA5A4A; color:#fff;}
+
+.pomo-duration{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--paper);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  padding:10px 14px;
+  font-size:.85rem;
+  color:var(--ink-soft);
+}
+.pomo-duration select{
+  font-family:inherit; font-size:.88rem; font-weight:700; color:var(--ink);
+  background:none; border:none; outline:none;
+}
+
+/* stats grid */
+.pomo-stats{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.pomo-stat{
+  background:var(--surface);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  display:flex; align-items:center; gap:10px;
+}
+.pomo-stat .ic{font-size:1.4rem;}
+.pomo-stat .n{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:1.15rem; color:var(--ink);}
+.pomo-stat .l{font-size:.72rem; color:var(--ink-soft);}
+
+/* subject picker */
+.pomo-subjects{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:14px;
+}
+.pomo-subj-btn{
+  display:flex; align-items:center; gap:8px;
+  background:var(--paper);
+  border:2px solid transparent;
+  border-radius:var(--radius);
+  padding:12px 10px;
+  font-family:'Tajawal', sans-serif;
+  font-weight:700; font-size:.82rem;
+  color:var(--ink);
+  cursor:pointer;
+  text-align:right;
+}
+.pomo-subj-btn .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); flex-shrink:0;}
+.pomo-subj-btn.active{border-color:var(--accent); background:var(--surface); box-shadow:var(--shadow);}
+
+.pomo-note{
+  width:100%;
+  font-family:'Tajawal', sans-serif;
+  font-size:.85rem;
+  padding:10px 12px;
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius);
+  background:var(--paper);
+  color:var(--ink);
+  resize:vertical;
+  min-height:56px;
+}
+
+/* session list */
+.pomo-session-item{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid var(--paper-line);
+  font-size:.85rem;
+}
+.pomo-session-item:last-child{border-bottom:none;}
+.pomo-session-item .l{display:flex; align-items:center; gap:8px; color:var(--ink);}
+.pomo-session-item .dot{width:8px; height:8px; border-radius:50%; background:var(--accent);}
+.pomo-session-item .t{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.75rem;}
+.pomo-session-item .del{background:none; border:none; color:#B6431F; cursor:pointer; font-size:.85rem;}
+.pomo-empty{text-align:center; color:#9599B5; font-size:.85rem; padding:14px 0;}
+
+/* weekly chart */
+.pomo-chart{ display:flex; align-items:flex-end; gap:8px; height:140px; padding-top:10px; }
+.pomo-chart .bar-col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;}
+.pomo-chart .bar{
+  width:70%; background:var(--gold); border-radius:4px 4px 0 0;
+  min-height:3px;
+  transition:height .4s ease;
+}
+.pomo-chart .lbl{ font-size:.68rem; color:var(--ink-soft); margin-top:6px; }
+.pomo-chart .val{ font-size:.62rem; color:var(--ink-soft); margin-bottom:3px; font-family:'IBM Plex Mono',monospace; }
+
+.pomo-quote{
+  background:var(--brand-ink);
+  color:var(--on-dark);
+  border-radius:var(--radius);
+  padding:18px 20px;
+  font-size:.9rem;
+  line-height:1.8;
+  text-align:center;
+}
+.pomo-quote .auth{display:block; margin-top:8px; font-size:.75rem; color:var(--gold);}
+
+.pomo-tip{
+  background:#FBF3E3;
+  border:1px solid var(--gold);
+  border-radius:var(--radius);
+  padding:12px 16px;
+  font-size:.8rem;
+  color:var(--ink-soft);
+  display:flex; align-items:flex-start; gap:8px;
+}
+[data-theme="dark"] .pomo-tip{background:#2A2410; color:var(--ink-soft);}
+
 /* ---------- contact form ---------- */
 .contact-form-wrap{
   max-width:640px;

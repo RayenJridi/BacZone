@@ -1,11 +1,13 @@
-const CACHE_NAME = 'baczone-v3';
+const CACHE_NAME = 'baczone-v4';
 const CORE_ASSETS = [
   '/BacZone/index.html',
   '/BacZone/matieres.html',
   '/BacZone/contact.html',
   '/BacZone/favoris.html',
+  '/BacZone/pomodoro.html',
   '/BacZone/style.css',
   '/BacZone/app.js',
+  '/BacZone/pomodoro.js',
   '/BacZone/manifest.json',
   '/BacZone/icons/icon-192.png',
   '/BacZone/icons/icon-512.png',

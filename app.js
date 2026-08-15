@@ -257,6 +257,153 @@
 
   // نعرضها عالميا باش صفحة favoris.html تنجم تستعملها
   window.BacZoneFav = { getFavorites, saveFavorites, toggleFavorite, isFavorited };
+
+  // ---------- 5) بانر Pomodoro عالمي (يبان في كل صفحات الموقع) ----------
+  // صفحة pomodoro.html عندها المحرك الكامل بروحها — هوني بس "مرآة" خفيفة
+  // تقرا نفس الحالة من localStorage وتوري بانر يتبعك أينما رحت فالموقع.
+  (function () {
+    const SESS_KEY = "baczone_pomo_sessions_v1";
+    const STATE_KEY = "baczone_pomo_active_v1";
+    const NOTIF_TAG = "baczone-pomo";
+    const MIN_LOG_SECONDS = 60;
+
+    const SUBJECTS = [
+      { id: "mathematiques", name: "Mathématiques", accent: "#3E63B5" },
+      { id: "physique", name: "Physique", accent: "#7A4FBF" },
+      { id: "genie-electrique", name: "Génie Électrique", accent: "#C9822B" },
+      { id: "mecanique", name: "Mécanique", accent: "#45795A" },
+      { id: "arabe", name: "Arabe", accent: "#B04A32" },
+      { id: "francais", name: "Français", accent: "#1F7A73" },
+      { id: "anglais", name: "Anglais", accent: "#AD3B69" },
+      { id: "philosophie", name: "Philosophie", accent: "#6B4A34" },
+      { id: "autre", name: "أخرى", accent: "#8A8FA9" },
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // كي نكونو في pomodoro.html نفسها، عندها محرّكها الكامل — منولّيوش نتداخلو معاها
+      if (document.getElementById("pmRingFg")) return;
+
+      const banner = document.getElementById("pomoLiveBanner");
+      if (!banner) return;
+
+      const els = {
+        icon: document.getElementById("pomoLiveIcon"),
+        title: document.getElementById("pomoLiveTitle"),
+        subject: document.getElementById("pomoLiveSubject"),
+        time: document.getElementById("pomoLiveTime"),
+        action: document.getElementById("pomoLiveAction"),
+      };
+
+      let tickId = null;
+
+      function loadState() {
+        try { return JSON.parse(localStorage.getItem(STATE_KEY)); }
+        catch (e) { return null; }
+      }
+      function clearState() { localStorage.removeItem(STATE_KEY); }
+
+      function getSessions() {
+        try { return JSON.parse(localStorage.getItem(SESS_KEY)) || []; }
+        catch (e) { return []; }
+      }
+      function saveSessions(list) { localStorage.setItem(SESS_KEY, JSON.stringify(list)); }
+
+      function logSession(subject, minutes, note) {
+        const sessions = getSessions();
+        sessions.unshift({
+          id: Date.now(),
+          date: new Date().toISOString().slice(0, 10),
+          time: new Date().toTimeString().slice(0, 5),
+          subject: subject.name,
+          subjectId: subject.id,
+          accent: subject.accent,
+          duration: minutes,
+          note: (note || "").slice(0, 100),
+        });
+        saveSessions(sessions);
+      }
+
+      function showNotification(title, body) {
+        if (!("Notification" in window) || Notification.permission !== "granted") return;
+        const payload = {
+          body, tag: NOTIF_TAG, renotify: true,
+          icon: "/BacZone/icons/icon-192.png",
+          badge: "/BacZone/icons/icon-192.png",
+          vibrate: [150, 60, 150],
+        };
+        if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+          navigator.serviceWorker.ready.then((reg) => reg.showNotification(title, payload)).catch(() => {});
+        }
+      }
+
+      function hideBanner() {
+        banner.classList.remove("show");
+        banner.setAttribute("aria-hidden", "true");
+        clearInterval(tickId);
+        tickId = null;
+      }
+
+      function render() {
+        const saved = loadState();
+        if (!saved || !saved.endAt) { hideBanner(); return; }
+
+        const remaining = Math.round((saved.endAt - Date.now()) / 1000);
+        const subject = SUBJECTS.find((s) => s.id === saved.subjectId) || SUBJECTS[0];
+
+        if (remaining <= 0) {
+          // خلصت الجلسة وقتلي كنا فصفحة أخرى — نسجلوها كاملة
+          if (saved.mode === "pomodoro") {
+            logSession(subject, saved.durationMin, saved.note);
+            showNotification("🍅 خلصت الجلسة!", `${saved.durationMin} دقيقة ${subject.name} — برافو 🎉`);
+          }
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+          clearState();
+          hideBanner();
+          return;
+        }
+
+        banner.classList.add("show");
+        banner.setAttribute("aria-hidden", "false");
+        const m = Math.floor(remaining / 60).toString().padStart(2, "0");
+        const s = Math.floor(remaining % 60).toString().padStart(2, "0");
+        els.time.textContent = `${m}:${s}`;
+
+        if (saved.mode === "pomodoro") {
+          els.icon.textContent = "🍅";
+          els.title.textContent = "Pomodoro شغّال";
+          els.subject.textContent = subject.name;
+        } else {
+          els.icon.textContent = "☕";
+          els.title.textContent = "Pause شغّالة";
+          els.subject.textContent = "استراحة";
+        }
+      }
+
+      if (els.action) {
+        els.action.addEventListener("click", () => {
+          const saved = loadState();
+          if (!saved || !saved.endAt) { hideBanner(); return; }
+          const remaining = Math.max(0, Math.round((saved.endAt - Date.now()) / 1000));
+          const elapsedSec = (saved.durationMin * 60) - remaining;
+          const subject = SUBJECTS.find((s) => s.id === saved.subjectId) || SUBJECTS[0];
+
+          if (saved.mode === "pomodoro" && elapsedSec >= MIN_LOG_SECONDS) {
+            logSession(subject, Math.floor(elapsedSec / 60), saved.note);
+          }
+          clearState();
+          hideBanner();
+        });
+      }
+
+      render();
+      tickId = setInterval(render, 1000);
+
+      // كي يرجع الطالب للتبويبة (كانت فالخلفية)، نصحح الوقت فورا
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") render();
+      });
+    });
+  })();
 })();
 
 

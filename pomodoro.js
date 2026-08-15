@@ -88,6 +88,12 @@
       chart: document.getElementById("pmChart"),
       quote: document.getElementById("pmQuote"),
       notifBtn: document.getElementById("pmNotifBtn"),
+      liveBanner: document.getElementById("pomoLiveBanner"),
+      liveIcon: document.getElementById("pomoLiveIcon"),
+      liveTitle: document.getElementById("pomoLiveTitle"),
+      liveSubject: document.getElementById("pomoLiveSubject"),
+      liveTime: document.getElementById("pomoLiveTime"),
+      liveAction: document.getElementById("pomoLiveAction"),
     };
 
     if (!els.ring) return; // مش صفحة Pomodoro
@@ -199,6 +205,29 @@
     const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
     els.quote.innerHTML = `“${q.t}”` + (q.a ? `<span class="auth">— ${q.a}</span>` : "");
 
+    // ---------- live banner: يظهر فوق الموقع أثناء الجلسة ----------
+    function renderLiveBanner(remaining) {
+      if (!els.liveBanner) return;
+      const active = running && remaining > 0;
+      els.liveBanner.classList.toggle("show", active);
+      els.liveBanner.setAttribute("aria-hidden", active ? "false" : "true");
+      if (!active) return;
+
+      const mins = Math.floor(remaining / 60).toString().padStart(2, "0");
+      const secs = Math.floor(remaining % 60).toString().padStart(2, "0");
+      els.liveTime.textContent = `${mins}:${secs}`;
+
+      if (mode === "pomodoro") {
+        els.liveIcon.textContent = "🍅";
+        els.liveTitle.textContent = "Pomodoro شغّال";
+        els.liveSubject.textContent = selectedSubject.name;
+      } else {
+        els.liveIcon.textContent = "☕";
+        els.liveTitle.textContent = "Pause شغّالة";
+        els.liveSubject.textContent = "استراحة";
+      }
+    }
+
     // ---------- الوقت المتبقي الحقيقي (يتحسب من التوقيت، موش عد تيكات) ----------
     function computeRemaining() {
       if (running && endAt) {
@@ -228,6 +257,7 @@
       const m = Math.floor(remaining / 60).toString().padStart(2, "0");
       const s = Math.floor(remaining % 60).toString().padStart(2, "0");
       els.time.textContent = `${m}:${s}`;
+      renderLiveBanner(remaining);
       return remaining;
     }
 
@@ -298,6 +328,11 @@
       updateButtonsUI();
       startTicking();
       startNotifLoop();
+      if (mode === "pomodoro") {
+        showNotification("🍅 BacZone — بدأت الجلسة", `${durationMin} دقيقة ${selectedSubject.name}. ركّز توا 💪`);
+      } else {
+        showNotification("☕ BacZone — وقت الراحة", "خذ نفس وارجع بقوة.");
+      }
       persistState();
     }
 
@@ -388,6 +423,9 @@
     });
     els.resetBtn.addEventListener("click", resetTimer);
     els.stopBtn.addEventListener("click", stopTimer);
+    if (els.liveAction) {
+      els.liveAction.addEventListener("click", stopTimer);
+    }
 
     // ---------- rendering: stats, list, chart ----------
     function renderStats(sessions) {

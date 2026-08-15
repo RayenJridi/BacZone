@@ -1,4 +1,4 @@
-const CACHE_NAME = 'baczone-v4';
+const CACHE_NAME = 'baczone-v6';
 const CORE_ASSETS = [
   '/BacZone/index.html',
   '/BacZone/matieres.html',
@@ -39,24 +39,22 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// كاش أوّل، وإلا يمشي للشبكة (بلا ما يخرب الروابط لـ Google Drive، برك يخدم على الصفحات تاع الموقع)
+// الشبكة أولا: كل مرة فما نات، ناخذ آخر نسخة مباشرة من GitHub.
+// الكاش يخدم غير كحل احتياطي كي ما فماش نات خالص (Offline).
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-  if (url.origin !== self.location.origin) return; // ما يلمسش روابط Drive/CDN خارجية
+  if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((res) => {
-          if (res && res.status === 200) {
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return res;
-        })
-        .catch(() => cached);
-    })
+    fetch(event.request)
+      .then((res) => {
+        if (res && res.status === 200) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return res;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

@@ -873,7 +873,7 @@ img{max-width:100%;}
   background:var(--paper); padding:3px 12px; border-radius:12px; margin-top:6px;
 }
 
-.pomo-controls{ display:flex; justify-content:center; gap:10px; margin-bottom:18px; }
+.pomo-controls{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:18px; }
 .pomo-controls button{
   border:none; border-radius:20px;
   padding:11px 22px;
@@ -885,6 +885,9 @@ img{max-width:100%;}
 .pomo-controls .pm-reset{background:var(--paper); color:var(--ink-soft); border:1px solid var(--paper-line) !important;}
 .pomo-controls .pm-start{background:var(--gold); color:var(--ink);}
 .pomo-controls .pm-start.running{background:#DA5A4A; color:#fff;}
+.pomo-controls .pm-stop{background:var(--paper); color:#B6431F; border:1px solid #DA5A4A !important;}
+.pomo-controls .pm-stop:hover{background:#FCE9DE;}
+.pomo-controls .pm-stop:disabled{opacity:.4; cursor:not-allowed;}
 
 .pomo-duration{
   display:flex; align-items:center; justify-content:space-between;
@@ -991,6 +994,27 @@ img{max-width:100%;}
   display:flex; align-items:flex-start; gap:8px;
 }
 [data-theme="dark"] .pomo-tip{background:#2A2410; color:var(--ink-soft);}
+
+.pomo-notif-btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%;
+  background:var(--paper);
+  border:1px dashed var(--paper-line);
+  border-radius:var(--radius);
+  padding:10px 14px;
+  font-family:'Tajawal', sans-serif;
+  font-size:.82rem;
+  font-weight:700;
+  color:var(--ink-soft);
+  cursor:pointer;
+  margin-top:12px;
+}
+.pomo-notif-btn.on{
+  background:#E4F3E8;
+  border:1px solid #3F9D5C;
+  color:#276B3E;
+}
+[data-theme="dark"] .pomo-notif-btn.on{background:#173322; color:#7FD99A; border-color:#3F9D5C;}
 
 /* ---------- contact form ---------- */
 .contact-form-wrap{

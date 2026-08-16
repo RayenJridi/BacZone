@@ -63,6 +63,35 @@
 
 <div class="pomo-wrap">
 
+  <!-- Study Goal -->
+  <div class="pomo-card goal-card">
+    <div class="goal-head">
+      <div>
+        <span class="goal-kicker">🎯 هدف اليوم</span>
+        <p class="goal-motivation" id="goalMotivation">كل دقيقة تقرّبك من هدفك.</p>
+      </div>
+      <button type="button" class="goal-settings-btn" id="goalSettingsBtn" aria-label="غيّر الهدف">⚙️</button>
+    </div>
+    <div class="goal-main">
+      <div class="goal-ring" id="goalRing" style="--goal-progress:0deg">
+        <div class="goal-ring-inner">
+          <strong id="goalPercent">0%</strong>
+          <span>من الهدف</span>
+        </div>
+      </div>
+      <div class="goal-info">
+        <strong id="goalTimeText">0د / 60د</strong>
+        <span>وقت المراجعة اليوم</span>
+        <div class="goal-bar"><i id="goalProgressBar" style="width:0%"></i></div>
+        <small id="goalRemainingText">باقي 60 دقيقة</small>
+      </div>
+    </div>
+    <div class="goal-foot">
+      <div class="goal-streak"><span>🔥</span><div><strong id="goalStreakText">0</strong><small>أيام حققت هدفها</small></div></div>
+      <button type="button" class="goal-change-btn" id="goalActionBtn">غيّر الهدف</button>
+    </div>
+  </div>
+
   <!-- Timer -->
   <div class="pomo-card">
     <div class="pomo-tabs">
@@ -138,6 +167,25 @@
     💡 <span>نصيحة: راجع 25 دقيقة بتركيز كامل، بعدها خذ 5 دقايق راحة. بعد 4 جلسات، خذ راحة طويلة 15-30 دقيقة.</span>
   </div>
 
+</div>
+
+<div class="goal-modal" id="goalModal" aria-hidden="true">
+  <div class="goal-modal-box">
+    <button type="button" class="goal-modal-close" id="goalCloseBtn" aria-label="سكر">✕</button>
+    <span class="goal-kicker">🎯 هدف المراجعة اليومي</span>
+    <h3>قداش تحب تراجع اليوم؟</h3>
+    <div class="goal-presets">
+      <button type="button" data-goal="30">30د</button>
+      <button type="button" data-goal="60">1س</button>
+      <button type="button" data-goal="90">1س 30د</button>
+      <button type="button" data-goal="120">2س</button>
+      <button type="button" data-goal="180">3س</button>
+    </div>
+    <div class="goal-custom">
+      <input type="number" id="goalCustomInput" min="5" max="1440" placeholder="دقائق مخصصة">
+      <button type="button" id="goalSaveBtn">حفظ</button>
+    </div>
+  </div>
 </div>
 
 <div class="verse-box">

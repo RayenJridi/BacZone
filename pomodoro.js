@@ -297,6 +297,7 @@
     // ---------- محرك التايمر ----------
     function tick() {
       const remaining = updateRing();
+      renderGoal();
       if (remaining <= 0) {
         finishSession();
       }
@@ -519,7 +520,100 @@
       renderStats(sessions);
       renderList(sessions);
       renderChart(sessions);
+      renderGoal();
     }
+
+    // ---------- 🎯 هدف الدراسة اليومي ----------
+    // مربوطة بنفس مصفوفة الجلسات (getSessions) — بلا أي تخزين موازي.
+    const GOAL_KEY = "baczone_goal_v1";
+
+    function loadGoal() {
+      try {
+        const g = JSON.parse(localStorage.getItem(GOAL_KEY));
+        if (g && g.target) return g;
+      } catch (e) {}
+      return { target: 60, streak: 0, lastMetDate: null };
+    }
+    function saveGoal(g) { localStorage.setItem(GOAL_KEY, JSON.stringify(g)); }
+
+    function formatMin(n) {
+      n = Math.max(0, Math.round(n));
+      if (n >= 60) {
+        const h = Math.floor(n / 60), m = n % 60;
+        return m > 0 ? `${h}س ${m}د` : `${h}س`;
+      }
+      return `${n}د`;
+    }
+
+    function liveExtraMinutes() {
+      // جلسة Pomodoro شغالة توا؟ نحسبو وقتها الحي كزيادة فورية على هدف اليوم
+      if (mode === "pomodoro" && running) {
+        const elapsed = (durationMin * 60) - computeRemaining();
+        return Math.max(0, Math.floor(elapsed / 60));
+      }
+      return 0;
+    }
+
+    function renderGoal() {
+      const ring = document.getElementById("goalRing");
+      if (!ring) return; // مفماش كارت الهدف فهاذ الصفحة
+
+      const goal = loadGoal();
+      const sessions = getSessions();
+      const today = todayStr();
+      const loggedToday = sessions.filter(s => s.date === today).reduce((sum, s) => sum + s.duration, 0);
+      const liveToday = loggedToday + liveExtraMinutes();
+      const pct = Math.max(0, Math.min(100, Math.round((liveToday / goal.target) * 100)));
+
+      document.getElementById("goalPercent").textContent = pct + "%";
+      ring.style.setProperty("--goal-progress", (pct * 3.6) + "deg");
+      document.getElementById("goalTimeText").textContent = `${formatMin(liveToday)} / ${formatMin(goal.target)}`;
+      document.getElementById("goalProgressBar").style.width = pct + "%";
+      document.getElementById("goalRemainingText").textContent =
+        pct >= 100 ? "🎉 حققت هدفك اليوم!" : `باقي ${formatMin(goal.target - liveToday)}`;
+      document.getElementById("goalMotivation").textContent =
+        pct >= 100 ? "🔥 ممتاز! هدف اليوم مكتمل." : pct >= 70 ? "💪 قربت توصل، كمل!" : "كل دقيقة تقرّبك من هدفك.";
+
+      if (liveToday >= goal.target && goal.lastMetDate !== today) {
+        const yesterday = todayStr(new Date(Date.now() - 86400000));
+        goal.streak = (goal.lastMetDate === yesterday) ? (goal.streak + 1) : 1;
+        goal.lastMetDate = today;
+        saveGoal(goal);
+      }
+      document.getElementById("goalStreakText").textContent = goal.streak || 0;
+    }
+
+    // ---------- Modal تغيير الهدف ----------
+    const goalModal = document.getElementById("goalModal");
+    function openGoalModal() { if (goalModal) goalModal.classList.add("show"); }
+    function closeGoalModal() { if (goalModal) goalModal.classList.remove("show"); }
+
+    document.getElementById("goalSettingsBtn")?.addEventListener("click", openGoalModal);
+    document.getElementById("goalActionBtn")?.addEventListener("click", openGoalModal);
+    document.getElementById("goalCloseBtn")?.addEventListener("click", closeGoalModal);
+    goalModal?.addEventListener("click", (e) => { if (e.target === goalModal) closeGoalModal(); });
+
+    document.querySelectorAll("[data-goal]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const g = loadGoal();
+        g.target = parseInt(btn.dataset.goal, 10);
+        saveGoal(g);
+        renderGoal();
+        closeGoalModal();
+      });
+    });
+
+    document.getElementById("goalSaveBtn")?.addEventListener("click", () => {
+      const input = document.getElementById("goalCustomInput");
+      const v = Math.max(5, Math.min(1440, parseInt(input.value, 10) || 0));
+      if (!v) return;
+      const g = loadGoal();
+      g.target = v;
+      saveGoal(g);
+      renderGoal();
+      closeGoalModal();
+      input.value = "";
+    });
 
     // ---------- استرجاع جلسة كانت شغالة (بعد رجوع/إعادة فتح الصفحة) ----------
     function restoreActiveState() {

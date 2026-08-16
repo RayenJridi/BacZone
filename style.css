@@ -973,6 +973,45 @@ img{max-width:100%;}
 .pomo-chart .lbl{ font-size:.68rem; color:var(--ink-soft); margin-top:6px; }
 .pomo-chart .val{ font-size:.62rem; color:var(--ink-soft); margin-bottom:3px; font-family:'IBM Plex Mono',monospace; }
 
+.pomo-subhead{
+  font-family:'Tajawal',sans-serif; font-weight:800; font-size:.9rem;
+  color:var(--ink); margin:22px 0 10px;
+}
+.pomo-stats.long-term{ grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); }
+
+.month-compare{
+  display:flex; align-items:center; gap:10px;
+  background:var(--paper); border:1px solid var(--paper-line);
+  border-radius:var(--radius); padding:12px 16px;
+  margin-top:16px; font-size:.85rem; color:var(--ink-soft);
+}
+.month-compare .badge{
+  font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.78rem;
+  padding:3px 10px; border-radius:20px; flex-shrink:0;
+}
+.month-compare .badge.up{ background:#E4F3E8; color:#276B3E; }
+.month-compare .badge.down{ background:#FCE9DE; color:#B6431F; }
+.month-compare .badge.flat{ background:var(--paper-line); color:var(--ink-soft); }
+
+.pomo-chart.months .bar-col .bar{ background:linear-gradient(180deg, var(--gold), #B8862F); }
+.pomo-chart.months .bar-col.current .bar{ background:linear-gradient(180deg, #4D8EF0, #2F5FB8); }
+
+.daily-compare{
+  display:grid; gap:10px;
+  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+}
+.daily-compare .dc-item{
+  background:var(--paper); border:1px solid var(--paper-line);
+  border-radius:var(--radius); padding:14px 16px; text-align:center;
+}
+.daily-compare .dc-item strong{
+  display:block; font-family:'Tajawal',sans-serif; font-weight:800;
+  font-size:1.15rem; color:var(--ink);
+}
+.daily-compare .dc-item span{ font-size:.72rem; color:#9599B5; }
+.daily-compare .dc-item.highlight{ border-color:var(--gold); background:#FBF3E3; }
+[data-theme="dark"] .daily-compare .dc-item.highlight{ background:#2A2410; }
+
 .pomo-quote{
   background:var(--brand-ink);
   color:var(--on-dark);

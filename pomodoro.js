@@ -515,11 +515,128 @@
       }).join("");
     }
 
+    function fmtHM(mins) {
+      mins = Math.round(mins);
+      const h = Math.floor(mins / 60), m = mins % 60;
+      if (h === 0) return `${m}m`;
+      return m > 0 ? `${h}h${m}m` : `${h}h`;
+    }
+
+    // ---------- 📊 إحصائيات على المدى الطويل: مجموع كلي، أسبوع، شهر، مقارنة أشهر، مقارنة يومية ----------
+    function renderLongTermStats(sessions) {
+      const elAllTime = document.getElementById("pmStatAllTime");
+      if (!elAllTime) return; // مفماش هاذ القسم فهاذ الصفحة
+
+      const now = new Date();
+
+      // المجموع الكلي
+      const allTimeMin = sessions.reduce((sum, s) => sum + s.duration, 0);
+      elAllTime.textContent = fmtHM(allTimeMin);
+
+      // هاذ الأسبوع
+      const startOfWeek = new Date(now);
+      startOfWeek.setDate(now.getDate() - now.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+      const weekMin = sessions
+        .filter(s => new Date(s.date) >= startOfWeek)
+        .reduce((sum, s) => sum + s.duration, 0);
+      document.getElementById("pmStatWeek").textContent = fmtHM(weekMin);
+
+      // هاذ الشهر مقابل الشهر الفارط
+      const ym = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      const thisYM = ym(now);
+      const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const lastYM = ym(lastMonthDate);
+
+      const monthMin = sessions.filter(s => s.date.slice(0, 7) === thisYM).reduce((sum, s) => sum + s.duration, 0);
+      const lastMonthMin = sessions.filter(s => s.date.slice(0, 7) === lastYM).reduce((sum, s) => sum + s.duration, 0);
+      document.getElementById("pmStatMonth").textContent = fmtHM(monthMin);
+
+      const cmp = document.getElementById("pmMonthCompare");
+      if (cmp) {
+        if (lastMonthMin === 0 && monthMin === 0) {
+          cmp.innerHTML = `<span>ابدا أول جلسة هاذ الشهر، ونوروك التقدم من هنا 🚀</span>`;
+        } else if (lastMonthMin === 0) {
+          cmp.innerHTML = `<span class="badge up">جديد ✨</span><span>ما كانش عندك مراجعة الشهر الفارط — هاذ الشهر بداية زينة!</span>`;
+        } else {
+          const diffPct = Math.round(((monthMin - lastMonthMin) / lastMonthMin) * 100);
+          const cls = diffPct > 0 ? "up" : diffPct < 0 ? "down" : "flat";
+          const arrow = diffPct > 0 ? "📈" : diffPct < 0 ? "📉" : "➖";
+          const sign = diffPct > 0 ? "+" : "";
+          cmp.innerHTML = `<span class="badge ${cls}">${arrow} ${sign}${diffPct}%</span><span>مقارنة بالشهر الفارط (${fmtHM(lastMonthMin)})</span>`;
+        }
+      }
+
+      // مقارنة آخر 6 أشهر
+      const monthsChart = document.getElementById("pmMonthsChart");
+      if (monthsChart) {
+        const monthNames = ["جانفي","فيفري","مارس","أفريل","ماي","جوان","جويلية","أوت","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+        const months = [];
+        let maxM = 1;
+        for (let i = 5; i >= 0; i--) {
+          const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+          const key = ym(d);
+          const mins = sessions.filter(s => s.date.slice(0, 7) === key).reduce((sum, s) => sum + s.duration, 0);
+          months.push({ label: monthNames[d.getMonth()].slice(0, 3), mins, current: i === 0 });
+          if (mins > maxM) maxM = mins;
+        }
+        monthsChart.innerHTML = months.map(m => {
+          const h = Math.max(3, Math.round((m.mins / maxM) * 100));
+          return `
+          <div class="bar-col ${m.current ? "current" : ""}">
+            <span class="val">${m.mins > 0 ? fmtHM(m.mins) : ""}</span>
+            <div class="bar" style="height:${h}%"></div>
+            <span class="lbl">${m.label}</span>
+          </div>`;
+        }).join("");
+      }
+
+      // مقارنة يومية: معدلك اليوم مقابل معدلك العام، وأحسن يوم
+      const dailyCompare = document.getElementById("pmDailyCompare");
+      if (dailyCompare) {
+        const byDate = {};
+        sessions.forEach(s => { byDate[s.date] = (byDate[s.date] || 0) + s.duration; });
+        const activeDays = Object.keys(byDate);
+        const avgPerActiveDay = activeDays.length ? (allTimeMin / activeDays.length) : 0;
+
+        const today = todayStr();
+        const todayMin = byDate[today] || 0;
+
+        let bestDay = null, bestMin = 0;
+        activeDays.forEach(d => { if (byDate[d] > bestMin) { bestMin = byDate[d]; bestDay = d; } });
+
+        const diffFromAvg = todayMin - avgPerActiveDay;
+        const diffLabel = activeDays.length === 0
+          ? "بلاش مقارنة توا"
+          : diffFromAvg >= 0 ? `+${fmtHM(diffFromAvg)} فوق معدلك` : `${fmtHM(Math.abs(diffFromAvg))} تحت معدلك`;
+
+        dailyCompare.innerHTML = `
+          <div class="dc-item ${todayMin >= avgPerActiveDay && activeDays.length ? "highlight" : ""}">
+            <strong>${fmtHM(todayMin)}</strong>
+            <span>اليوم</span>
+          </div>
+          <div class="dc-item">
+            <strong>${activeDays.length ? fmtHM(avgPerActiveDay) : "—"}</strong>
+            <span>معدلك اليومي</span>
+          </div>
+          <div class="dc-item">
+            <strong>${diffLabel}</strong>
+            <span>وين واقف توا</span>
+          </div>
+          <div class="dc-item highlight">
+            <strong>${bestDay ? fmtHM(bestMin) : "—"}</strong>
+            <span>${bestDay ? "أحسن يوم (" + bestDay + ")" : "أحسن يوم"}</span>
+          </div>
+        `;
+      }
+    }
+
     function renderAll() {
       const sessions = getSessions();
       renderStats(sessions);
       renderList(sessions);
       renderChart(sessions);
+      renderLongTermStats(sessions);
       renderGoal();
     }
 

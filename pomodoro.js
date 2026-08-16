@@ -631,12 +631,53 @@
       }
     }
 
+    // ---------- 🧭 أين أنا؟ (مقارنة المواد هاذ الأسبوع) ----------
+    function renderBalanceBoard(sessions) {
+      const board = document.getElementById("pmBalanceBoard");
+      if (!board) return;
+
+      const now = new Date();
+      const startOfWeek = new Date(now);
+      startOfWeek.setDate(now.getDate() - now.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+
+      const weekSessions = sessions.filter(s => new Date(s.date) >= startOfWeek);
+      const realSubjects = SUBJECTS.filter(s => s.id !== "autre");
+
+      const perSubject = realSubjects.map(s => {
+        const mins = weekSessions.filter(x => x.subjectId === s.id).reduce((sum, x) => sum + x.duration, 0);
+        return Object.assign({}, s, { mins });
+      });
+
+      const maxMins = Math.max(1, ...perSubject.map(s => s.mins));
+      const totalWeek = perSubject.reduce((sum, s) => sum + s.mins, 0);
+
+      if (totalWeek === 0) {
+        board.innerHTML = `<p class="balance-empty-msg">مازلت ما بديتش تسجل جلسات هاذ الأسبوع — بدا Pomodoro في أي مادة ونوروك التوازن هنا 🧭</p>`;
+        return;
+      }
+
+      perSubject.sort((a, b) => b.mins - a.mins);
+
+      board.innerHTML = perSubject.map(s => {
+        const pct = Math.round((s.mins / maxMins) * 100);
+        const isEmpty = s.mins === 0;
+        return `
+        <div class="balance-row ${isEmpty ? "empty" : ""}">
+          <div class="name"><span class="dot" style="background:${s.accent}"></span>${s.name}</div>
+          <div class="track"><div class="fill" style="width:${pct}%; background:${s.accent}"></div></div>
+          <div class="pct">${isEmpty ? "⚠️ 0" : fmtHM(s.mins)}</div>
+        </div>`;
+      }).join("");
+    }
+
     function renderAll() {
       const sessions = getSessions();
       renderStats(sessions);
       renderList(sessions);
       renderChart(sessions);
       renderLongTermStats(sessions);
+      renderBalanceBoard(sessions);
       renderGoal();
     }
 
@@ -784,6 +825,132 @@
       }
     }
 
+    // ---------- 📝 مهامي اليوم (To-Do) ----------
+    const TODO_KEY = "baczone_todos_v1";
+
+    function getTodos() {
+      try { return JSON.parse(localStorage.getItem(TODO_KEY)) || []; }
+      catch (e) { return []; }
+    }
+    function saveTodos(list) { localStorage.setItem(TODO_KEY, JSON.stringify(list)); }
+
+    function initTodoUI() {
+      const select = document.getElementById("todoSubjectSelect");
+      const input = document.getElementById("todoInput");
+      const addBtn = document.getElementById("todoAddBtn");
+      const list = document.getElementById("todoList");
+      if (!select || !list) return;
+
+      select.innerHTML = SUBJECTS.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+
+      function todaysTodos() {
+        const today = todayStr();
+        return getTodos().filter(t => t.date === today);
+      }
+
+      function addTodo() {
+        const text = input.value.trim();
+        if (!text) return;
+        const all = getTodos();
+        all.unshift({
+          id: Date.now(),
+          text,
+          subjectId: select.value,
+          done: false,
+          date: todayStr(),
+        });
+        saveTodos(all);
+        input.value = "";
+        renderTodos();
+      }
+
+      addBtn.addEventListener("click", addTodo);
+      input.addEventListener("keydown", (e) => { if (e.key === "Enter") addTodo(); });
+
+      function renderTodos() {
+        const todos = todaysTodos();
+        const doneCount = todos.filter(t => t.done).length;
+        const total = todos.length;
+        const pct = total ? Math.round((doneCount / total) * 100) : 0;
+
+        document.getElementById("todoCounter").textContent = `${doneCount} / ${total}`;
+        document.getElementById("todoProgressBar").style.width = pct + "%";
+
+        if (total === 0) {
+          list.innerHTML = `<p class="todo-empty">مازلت ما زدتش مهام اليوم — زيد أول وحدة فوق 📝</p>`;
+          return;
+        }
+
+        list.innerHTML = todos.map(t => {
+          const subj = SUBJECTS.find(s => s.id === t.subjectId) || SUBJECTS[SUBJECTS.length - 1];
+          return `
+          <div class="todo-item ${t.done ? "done" : ""}" data-id="${t.id}">
+            <button type="button" class="check" data-action="toggle">${t.done ? "✓" : ""}</button>
+            <div class="body">
+              <div class="txt" data-action="text">${t.text}</div>
+              <div class="subj" style="--accent:${subj.accent}">${subj.name}</div>
+            </div>
+            <div class="actions">
+              <button type="button" data-action="pomo" title="ابدا Pomodoro لهاذ المهمة">🍅</button>
+              <button type="button" data-action="edit" title="عدّل">✏️</button>
+              <button type="button" data-action="del" title="حذف">🗑</button>
+            </div>
+          </div>`;
+        }).join("");
+
+        list.querySelectorAll(".todo-item").forEach(row => {
+          const id = Number(row.dataset.id);
+
+          row.querySelector('[data-action="toggle"]').addEventListener("click", () => {
+            const all = getTodos();
+            const t = all.find(x => x.id === id);
+            if (t) { t.done = !t.done; saveTodos(all); renderTodos(); }
+          });
+
+          row.querySelector('[data-action="del"]').addEventListener("click", () => {
+            saveTodos(getTodos().filter(x => x.id !== id));
+            renderTodos();
+          });
+
+          row.querySelector('[data-action="pomo"]').addEventListener("click", () => {
+            const all = getTodos();
+            const t = all.find(x => x.id === id);
+            if (!t) return;
+            const subj = SUBJECTS.find(s => s.id === t.subjectId);
+            if (subj) {
+              selectedSubject = subj;
+              setActiveSubjectUI(subj.id);
+            }
+            els.note.value = t.text;
+            persistState();
+            document.querySelector(".pomo-card")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (!running) startTimer();
+          });
+
+          row.querySelector('[data-action="edit"]').addEventListener("click", () => {
+            const txtEl = row.querySelector('[data-action="text"]');
+            const current = txtEl.textContent;
+            txtEl.innerHTML = `<input type="text" class="edit-input" value="${current.replace(/"/g, "&quot;")}" maxlength="80">`;
+            const editInput = txtEl.querySelector("input");
+            editInput.focus();
+            function commit() {
+              const val = editInput.value.trim();
+              if (val) {
+                const all = getTodos();
+                const t = all.find(x => x.id === id);
+                if (t) { t.text = val; saveTodos(all); }
+              }
+              renderTodos();
+            }
+            editInput.addEventListener("blur", commit);
+            editInput.addEventListener("keydown", (e) => { if (e.key === "Enter") editInput.blur(); });
+          });
+        });
+      }
+
+      renderTodos();
+    }
+
     // كي يرجع الطالب للصفحة (تبويبة كانت فالخلفية)، نصحح الوقت فورا بلا ما نستنى tick
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && running) {
@@ -795,5 +962,6 @@
     // ---------- init ----------
     restoreActiveState();
     renderAll();
+    initTodoUI();
   });
 })();

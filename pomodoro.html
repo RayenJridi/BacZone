@@ -142,6 +142,27 @@
     </div>
   </div>
 
+  <!-- Où j'en suis -->
+  <div class="pomo-card">
+    <h2>🧭 أين أنا؟ <span class="pomo-subhint">(هاذ الأسبوع، مقارنة بأكثر مادة راجعتها)</span></h2>
+    <div id="pmBalanceBoard"></div>
+  </div>
+
+  <!-- To-Do -->
+  <div class="pomo-card">
+    <h2>📝 مهامي اليوم</h2>
+    <div class="todo-add-row">
+      <select id="todoSubjectSelect"></select>
+      <input type="text" id="todoInput" maxlength="80" placeholder="مثال: راجع درس الاشتقاق">
+      <button type="button" id="todoAddBtn">➕</button>
+    </div>
+    <div class="todo-progress-row">
+      <div class="todo-bar"><i id="todoProgressBar" style="width:0%"></i></div>
+      <span id="todoCounter">0 / 0</span>
+    </div>
+    <div id="todoList"></div>
+  </div>
+
   <!-- New session -->
   <div class="pomo-card">
     <h2>📚 جلسة جديدة — اختار المادة</h2>

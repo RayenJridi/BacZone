@@ -979,6 +979,92 @@ img{max-width:100%;}
 }
 .pomo-stats.long-term{ grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); }
 
+/* ---------- 🧭 أين أنا؟ ---------- */
+.pomo-subhint{ font-size:.68rem; font-weight:400; color:#9599B5; }
+.balance-row{
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:12px;
+}
+.balance-row .name{
+  width:110px; flex-shrink:0;
+  font-family:'Tajawal',sans-serif; font-weight:700; font-size:.8rem;
+  color:var(--ink); display:flex; align-items:center; gap:6px;
+}
+.balance-row .name .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+.balance-row .track{
+  flex:1; height:16px; border-radius:20px;
+  background:var(--paper); border:1px solid var(--paper-line);
+  overflow:hidden; position:relative;
+}
+.balance-row .fill{
+  height:100%; border-radius:20px;
+  transition:width .6s ease;
+}
+.balance-row .pct{
+  width:70px; flex-shrink:0; text-align:left;
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem; font-weight:700; color:var(--ink-soft);
+}
+.balance-row.empty .pct{ color:#DA5A4A; }
+.balance-empty-msg{
+  text-align:center; padding:30px 20px; color:#9599B5; font-size:.85rem;
+}
+
+/* ---------- 📝 مهامي اليوم ---------- */
+.todo-add-row{ display:flex; gap:8px; margin-bottom:12px; }
+.todo-add-row select{
+  flex:0 0 auto; max-width:120px;
+  padding:10px 8px; border-radius:var(--radius);
+  border:1px solid var(--paper-line); background:var(--paper); color:var(--ink);
+  font-family:'Tajawal',sans-serif; font-size:.78rem;
+}
+.todo-add-row input{
+  flex:1; min-width:0;
+  padding:10px 12px; border-radius:var(--radius);
+  border:1px solid var(--paper-line); background:var(--paper); color:var(--ink);
+  font-family:'Tajawal',sans-serif; font-size:.85rem;
+}
+.todo-add-row button{
+  flex-shrink:0; width:42px;
+  background:var(--gold); color:var(--ink); border:none;
+  border-radius:var(--radius); font-size:1.1rem; cursor:pointer;
+}
+
+.todo-progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.todo-bar{ flex:1; height:8px; border-radius:20px; background:var(--paper-line); overflow:hidden; }
+.todo-bar i{ display:block; height:100%; background:#45795A; border-radius:20px; transition:width .5s ease; }
+#todoCounter{ font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--ink-soft); flex-shrink:0; }
+
+.todo-item{
+  display:flex; align-items:center; gap:10px;
+  background:var(--paper); border:1px solid var(--paper-line);
+  border-radius:var(--radius); padding:11px 14px; margin-bottom:8px;
+}
+.todo-item .check{
+  width:22px; height:22px; border-radius:6px; flex-shrink:0;
+  border:2px solid var(--paper-line); background:var(--surface);
+  cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.8rem;
+}
+.todo-item.done .check{ background:#45795A; border-color:#45795A; color:#fff; }
+.todo-item .body{ flex:1; min-width:0; }
+.todo-item .txt{
+  font-size:.85rem; color:var(--ink); word-break:break-word;
+  font-family:'Tajawal',sans-serif;
+}
+.todo-item.done .txt{ text-decoration:line-through; color:#9599B5; }
+.todo-item .subj{ font-size:.68rem; color:var(--accent, #9599B5); margin-top:2px; }
+.todo-item .actions{ display:flex; gap:4px; flex-shrink:0; }
+.todo-item .actions button{
+  background:none; border:none; font-size:.9rem; cursor:pointer; padding:4px 6px;
+  color:#9599B5;
+}
+.todo-item .actions button:hover{ color:var(--ink); }
+.todo-item .edit-input{
+  width:100%; padding:6px 8px; border-radius:6px;
+  border:1px solid var(--gold); background:var(--surface); color:var(--ink);
+  font-family:'Tajawal',sans-serif; font-size:.85rem;
+}
+.todo-empty{ text-align:center; padding:24px; color:#9599B5; font-size:.85rem; }
+
 .month-compare{
   display:flex; align-items:center; gap:10px;
   background:var(--paper); border:1px solid var(--paper-line);

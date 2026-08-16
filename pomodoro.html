@@ -182,7 +182,14 @@
       <button type="button" data-goal="180">3س</button>
     </div>
     <div class="goal-custom">
-      <input type="number" id="goalCustomInput" min="5" max="1440" placeholder="دقائق مخصصة">
+      <div class="goal-custom-field">
+        <input type="number" id="goalHoursInput" min="0" max="24" placeholder="0">
+        <label>ساعات</label>
+      </div>
+      <div class="goal-custom-field">
+        <input type="number" id="goalMinutesInput" min="0" max="59" placeholder="0">
+        <label>دقائق</label>
+      </div>
       <button type="button" id="goalSaveBtn">حفظ</button>
     </div>
   </div>

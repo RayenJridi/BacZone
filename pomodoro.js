@@ -604,15 +604,20 @@
     });
 
     document.getElementById("goalSaveBtn")?.addEventListener("click", () => {
-      const input = document.getElementById("goalCustomInput");
-      const v = Math.max(5, Math.min(1440, parseInt(input.value, 10) || 0));
-      if (!v) return;
+      const hInput = document.getElementById("goalHoursInput");
+      const mInput = document.getElementById("goalMinutesInput");
+      const h = Math.max(0, parseInt(hInput.value, 10) || 0);
+      const m = Math.max(0, Math.min(59, parseInt(mInput.value, 10) || 0));
+      const total = Math.max(5, Math.min(1440, h * 60 + m));
+      if (h === 0 && m === 0) return; // ما زادش شي حاجة، نتجاهلو
+
       const g = loadGoal();
-      g.target = v;
+      g.target = total;
       saveGoal(g);
       renderGoal();
       closeGoalModal();
-      input.value = "";
+      hInput.value = "";
+      mInput.value = "";
     });
 
     // ---------- استرجاع جلسة كانت شغالة (بعد رجوع/إعادة فتح الصفحة) ----------

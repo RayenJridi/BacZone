@@ -1100,17 +1100,23 @@ img{max-width:100%;}
   color:var(--ink-soft); cursor:pointer;
 }
 .goal-presets button:hover{ background:var(--gold); color:var(--ink); border-color:var(--gold); }
-.goal-custom{ display:flex; gap:8px; }
+.goal-custom{ display:flex; gap:8px; align-items:flex-end; }
+.goal-custom-field{ flex:1; text-align:center; }
+.goal-custom-field label{
+  display:block; font-size:.68rem; color:#9599B5;
+  margin-top:4px; font-family:'Tajawal',sans-serif;
+}
 .goal-custom input{
-  flex:1; min-width:0;
-  padding:10px 12px; border-radius:var(--radius);
+  width:100%;
+  padding:10px 8px; border-radius:var(--radius);
   border:1px solid var(--paper-line); background:var(--paper); color:var(--ink);
-  font-family:'Tajawal',sans-serif; font-size:.88rem; text-align:center;
+  font-family:'Tajawal',sans-serif; font-size:.95rem; font-weight:700; text-align:center;
 }
 .goal-custom button{
   background:var(--gold); color:var(--ink); border:none;
-  border-radius:var(--radius); padding:10px 18px;
+  border-radius:var(--radius); padding:11px 18px;
   font-family:'Tajawal',sans-serif; font-weight:700; font-size:.85rem; cursor:pointer;
+  height:42px;
 }
 
 .pomo-notif-btn{

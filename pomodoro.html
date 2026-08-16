@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script>try{var t=localStorage.getItem('baczone_theme');var d=t?t==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1P6622NPPH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1P6622NPPH');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pomodoro — BacZone</title>
+<meta name="description" content="تايمر بومودورو مربوط بمواد الباكالوريا التقنية — ركّز 25 دقيقة، راقب وقت المراجعة تاعك يوم بيوم، بلا تسجيل وبلا إنترنت.">
+<link rel="canonical" href="https://RayenJridi.github.io/BacZone/pomodoro.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
+<link rel="manifest" href="/BacZone/manifest.json">
+<meta name="theme-color" content="#161A2B">
+<link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">Bac<span>Zone</span></span>
+      <span class="tagline">Bac Technique · تونس</span>
+    </div>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="matieres.html">المواد</a>
+      <a href="pomodoro.html" class="active">🍅 Pomodoro</a>
+      <a href="favoris.html">⭐ المفضلة</a>
+      <a href="contact.html">تواصل معنا</a>
+      <button type="button" class="nav-install-btn" id="navInstallBtn">📲 تثبيت</button>
+      <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="بدل الوضع الداكن/الفاتح" title="بدل الوضع الداكن/الفاتح">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wn-banner" id="whatsNewBanner"></div>
+<div class="pomo-live-banner" id="pomoLiveBanner" aria-live="polite" aria-hidden="true">
+  <div class="pomo-live-icon" id="pomoLiveIcon">🍅</div>
+  <div class="pomo-live-info">
+    <strong id="pomoLiveTitle">Pomodoro</strong>
+    <span id="pomoLiveSubject">Mathématiques</span>
+  </div>
+  <div class="pomo-live-time" id="pomoLiveTime">25:00</div>
+  <button type="button" id="pomoLiveAction" aria-label="إيقاف الجلسة">⏹</button>
+</div>
+
+
+<section class="intro-hero" style="padding:44px 24px 34px;">
+  <div class="avatar-badge">🍅 Pomodoro</div>
+  <h1>ركّز، راجع، تقدّم</h1>
+  <p class="sign" style="color:#B9BEDA; font-weight:500;">25 دقيقة تركيز، 5 دقايق راحة — كل جلسة تتسجل بروحها.</p>
+</section>
+
+<div class="pomo-wrap">
+
+  <!-- Study Goal -->
+  <div class="pomo-card goal-card">
+    <div class="goal-head">
+      <div>
+        <span class="goal-kicker">🎯 هدف اليوم</span>
+        <p class="goal-motivation" id="goalMotivation">كل دقيقة تقرّبك من هدفك.</p>
+      </div>
+      <button type="button" class="goal-settings-btn" id="goalSettingsBtn" aria-label="غيّر الهدف">⚙️</button>
+    </div>
+    <div class="goal-main">
+      <div class="goal-ring" id="goalRing" style="--goal-progress:0deg">
+        <div class="goal-ring-inner">
+          <strong id="goalPercent">0%</strong>
+          <span>من الهدف</span>
+        </div>
+      </div>
+      <div class="goal-info">
+        <strong id="goalTimeText">0د / 60د</strong>
+        <span>وقت المراجعة اليوم</span>
+        <div class="goal-bar"><i id="goalProgressBar" style="width:0%"></i></div>
+        <small id="goalRemainingText">باقي 60 دقيقة</small>
+      </div>
+    </div>
+    <div class="goal-foot">
+      <div class="goal-streak"><span>🔥</span><div><strong id="goalStreakText">0</strong><small>أيام حققت هدفها</small></div></div>
+      <button type="button" class="goal-change-btn" id="goalActionBtn">غيّر الهدف</button>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div class="pomo-card">
+    <div class="pomo-tabs">
+      <button type="button" id="pmTabPomo" class="active">🍅 Pomodoro</button>
+      <button type="button" id="pmTabPause">☕ Pause</button>
+    </div>
+
+    <div class="pomo-ring-wrap">
+      <div class="pomo-ring">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle class="bg" cx="110" cy="110" r="100"></circle>
+          <circle class="fg" id="pmRingFg" cx="110" cy="110" r="100"></circle>
+        </svg>
+        <div class="txt">
+          <div class="time" id="pmTime">25:00</div>
+          <div class="label" id="pmLabel">Pomodoro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pomo-controls">
+      <button type="button" class="pm-reset" id="pmReset">↺ Reset</button>
+      <button type="button" class="pm-start" id="pmStart">▶ Start</button>
+      <button type="button" class="pm-stop" id="pmStop">⏹ توقف</button>
+    </div>
+
+    <div class="pomo-duration">
+      <span>⏱ مدة الجلسة</span>
+      <select id="pmDurationSelect">
+        <option value="15">15 دقيقة</option>
+        <option value="25" selected>25 دقيقة</option>
+        <option value="45">45 دقيقة</option>
+        <option value="60">60 دقيقة</option>
+      </select>
+    </div>
+
+    <button type="button" class="pomo-notif-btn" id="pmNotifBtn">🔔 فعّل تنبيهات الوقت (يبان حتى برا الموقع)</button>
+  </div>
+
+  <!-- Aperçu du jour -->
+  <div class="pomo-card">
+    <h2>📊 نظرة على اليوم</h2>
+    <div class="pomo-stats">
+      <div class="pomo-stat"><span class="ic">🍅</span><div><div class="n" id="pmStatSessions">0</div><div class="l">جلسات اليوم</div></div></div>
+      <div class="pomo-stat"><span class="ic">⏰</span><div><div class="n" id="pmStatTime">0m</div><div class="l">وقت المراجعة اليوم</div></div></div>
+      <div class="pomo-stat"><span class="ic">🔥</span><div><div class="n" id="pmStatStreak">0</div><div class="l">أيام متتالية</div></div></div>
+      <div class="pomo-stat"><span class="ic">🏆</span><div><div class="n" id="pmStatTotal">0</div><div class="l">مجموع الجلسات</div></div></div>
+    </div>
+  </div>
+
+  <!-- Où j'en suis -->
+  <div class="pomo-card">
+    <h2>🧭 أين أنا؟ <span class="pomo-subhint">(هاذ الأسبوع، مقارنة بأكثر مادة راجعتها)</span></h2>
+    <div id="pmBalanceBoard"></div>
+  </div>
+
+  <!-- To-Do -->
+  <div class="pomo-card">
+    <h2>📝 مهامي اليوم</h2>
+    <div class="todo-add-row">
+      <select id="todoSubjectSelect"></select>
+      <input type="text" id="todoInput" maxlength="80" placeholder="مثال: راجع درس الاشتقاق">
+      <button type="button" id="todoAddBtn">➕</button>
+    </div>
+    <div class="todo-progress-row">
+      <div class="todo-bar"><i id="todoProgressBar" style="width:0%"></i></div>
+      <span id="todoCounter">0 / 0</span>
+    </div>
+    <div id="todoList"></div>
+  </div>
+
+  <!-- New session -->
+  <div class="pomo-card">
+    <h2>📚 جلسة جديدة — اختار المادة</h2>
+    <div class="pomo-subjects" id="pmSubjects"></div>
+    <textarea class="pomo-note" id="pmNote" maxlength="100" placeholder="شنوة باش تراجع؟ (اختياري)"></textarea>
+  </div>
+
+  <!-- Today's sessions -->
+  <div class="pomo-card">
+    <h2>📝 جلسات اليوم</h2>
+    <div id="pmSessionList"></div>
+  </div>
+
+  <!-- Weekly chart -->
+  <div class="pomo-card">
+    <h2>📈 وقت المراجعة (هاذ الأسبوع)</h2>
+    <div class="pomo-chart" id="pmChart"></div>
+  </div>
+
+  <!-- Long-term stats -->
+  <div class="pomo-card">
+    <h2>📊 إحصائياتك على المدى الطويل</h2>
+    <div class="pomo-stats long-term">
+      <div class="pomo-stat"><span class="ic">🗂️</span><div><div class="n" id="pmStatAllTime">0</div><div class="l">المجموع الكلي</div></div></div>
+      <div class="pomo-stat"><span class="ic">📅</span><div><div class="n" id="pmStatWeek">0</div><div class="l">هاذ الأسبوع</div></div></div>
+      <div class="pomo-stat"><span class="ic">🗓️</span><div><div class="n" id="pmStatMonth">0</div><div class="l">هاذ الشهر</div></div></div>
+    </div>
+
+    <div class="month-compare" id="pmMonthCompare"></div>
+
+    <h3 class="pomo-subhead">مقارنة آخر 6 أشهر</h3>
+    <div class="pomo-chart months" id="pmMonthsChart"></div>
+
+    <h3 class="pomo-subhead">وين واقف مقارنة بمعدلك؟</h3>
+    <div class="daily-compare" id="pmDailyCompare"></div>
+  </div>
+
+  <div class="pomo-quote" id="pmQuote"></div>
+
+  <div class="pomo-tip">
+    💡 <span>نصيحة: راجع 25 دقيقة بتركيز كامل، بعدها خذ 5 دقايق راحة. بعد 4 جلسات، خذ راحة طويلة 15-30 دقيقة.</span>
+  </div>
+
+</div>
+
+<div class="goal-modal" id="goalModal" aria-hidden="true">
+  <div class="goal-modal-box">
+    <button type="button" class="goal-modal-close" id="goalCloseBtn" aria-label="سكر">✕</button>
+    <span class="goal-kicker">🎯 هدف المراجعة اليومي</span>
+    <h3>قداش تحب تراجع اليوم؟</h3>
+    <div class="goal-presets">
+      <button type="button" data-goal="30">30د</button>
+      <button type="button" data-goal="60">1س</button>
+      <button type="button" data-goal="90">1س 30د</button>
+      <button type="button" data-goal="120">2س</button>
+      <button type="button" data-goal="180">3س</button>
+    </div>
+    <div class="goal-custom">
+      <div class="goal-custom-field">
+        <input type="number" id="goalHoursInput" min="0" max="24" placeholder="0">
+        <label>ساعات</label>
+      </div>
+      <div class="goal-custom-field">
+        <input type="number" id="goalMinutesInput" min="0" max="59" placeholder="0">
+        <label>دقائق</label>
+      </div>
+      <button type="button" id="goalSaveBtn">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<div class="verse-box">
+  <p>وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ ۝ وَأَنَّ سَعْيَهُ سَوْفَ يُرَىٰ 🤍</p>
+</div>
+
+<footer class="site-footer">
+  2026 © BacZone — فكرة وتصميم <span>Rayen Jridi</span> · نتعلم، نشارك، ونتقدم معًا 🇹🇳
+</footer>
+
+<div class="pwa-banner" id="pwaInstallBanner">
+  <div class="txt">
+    <strong>📱 ثبّت BacZone على هاتفك</strong>
+    توصل للموقع بسرعة من الشاشة الرئيسية، حتى بلا ما تفتح المتصفح.
+  </div>
+  <button type="button" id="pwaInstallBtn">تثبيت</button>
+  <button type="button" id="pwaDismissBtn">✕</button>
+</div>
+
+<script src="app.js"></script>
+<script src="pomodoro.js"></script>
+
+</body>
+</html>

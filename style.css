@@ -911,9 +911,10 @@ img{max-width:100%;}
   border-radius:var(--radius);
   padding:14px 16px;
   display:flex; align-items:center; gap:10px;
+  min-width:0;
 }
-.pomo-stat .ic{font-size:1.4rem;}
-.pomo-stat .n{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:1.15rem; color:var(--ink);}
+.pomo-stat .ic{font-size:1.4rem; flex-shrink:0;}
+.pomo-stat .n{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:1.15rem; color:var(--ink); overflow-wrap:anywhere;}
 .pomo-stat .l{font-size:.72rem; color:var(--ink-soft);}
 
 /* subject picker */
@@ -922,6 +923,7 @@ img{max-width:100%;}
 }
 .pomo-subj-btn{
   display:flex; align-items:center; gap:8px;
+  min-width:0;
   background:var(--paper);
   border:2px solid transparent;
   border-radius:var(--radius);
@@ -931,6 +933,7 @@ img{max-width:100%;}
   color:var(--ink);
   cursor:pointer;
   text-align:right;
+  overflow-wrap:anywhere;
 }
 .pomo-subj-btn .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); flex-shrink:0;}
 .pomo-subj-btn.active{border-color:var(--accent); background:var(--surface); box-shadow:var(--shadow);}
@@ -1090,6 +1093,7 @@ img{max-width:100%;}
 .daily-compare .dc-item{
   background:var(--paper); border:1px solid var(--paper-line);
   border-radius:var(--radius); padding:14px 16px; text-align:center;
+  min-width:0; overflow-wrap:anywhere;
 }
 .daily-compare .dc-item strong{
   display:block; font-family:'Tajawal',sans-serif; font-weight:800;

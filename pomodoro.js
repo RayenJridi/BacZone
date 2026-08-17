@@ -318,6 +318,7 @@
       const remaining = computeRemaining();
       const hasProgress = remaining < durationMin * 60;
       els.stopBtn.disabled = !running && !hasProgress;
+      document.querySelector(".pomo-ring")?.classList.toggle("is-running", running);
     }
 
     function startTimer() {

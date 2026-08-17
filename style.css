@@ -149,7 +149,7 @@ img{max-width:100%;}
 /* ---------- binder tab grid ---------- */
 .tabs{
   max-width:1080px;
-  margin:-52px auto 60px;
+  margin:0 auto 60px;
   padding:0 24px;
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
@@ -171,6 +171,49 @@ img{max-width:100%;}
 .tab .body{
   padding:20px 20px 22px;
 }
+.tab-icon{
+  width:44px; height:44px;
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; font-weight:700;
+  background:color-mix(in srgb, var(--accent, var(--gold)) 14%, transparent);
+  color:var(--accent, var(--gold));
+  margin-bottom:14px;
+  font-family:'Fraunces', serif;
+}
+
+/* ---------- trust bar ---------- */
+.trust-bar{
+  max-width:640px;
+  margin:-30px auto 46px;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  position:relative;
+  z-index:5;
+}
+.trust-item{
+  flex:1;
+  text-align:center;
+  background:var(--surface);
+  padding:14px 10px;
+  box-shadow:var(--shadow);
+}
+.trust-item:first-child{ border-radius:var(--radius) 0 0 var(--radius); }
+.trust-item:last-child{ border-radius:0 var(--radius) var(--radius) 0; }
+.trust-item strong{
+  display:block;
+  font-family:'Fraunces', serif; font-weight:700;
+  font-size:1.3rem; color:var(--ink);
+  line-height:1.2;
+}
+.trust-item span{
+  font-size:.68rem; color:#9599B5;
+}
+.trust-sep{ width:1px; align-self:stretch; background:var(--paper-line); }
+
 .tab .idx{
   font-family:'IBM Plex Mono',monospace;
   font-size:.72rem;
@@ -766,7 +809,16 @@ img{max-width:100%;}
   padding:60px 24px;
   color:#8A8FA9;
 }
-.fav-empty .big{font-size:2.4rem; margin-bottom:10px;}
+.fav-empty .big{
+  font-size:3rem; margin-bottom:14px;
+  animation:rise .5s ease both;
+}
+.fav-empty h3{
+  font-family:'Tajawal', sans-serif; font-weight:800;
+  font-size:1.15rem; color:var(--ink); margin:0 0 8px;
+}
+.fav-empty p{ max-width:340px; margin:0 auto 22px; line-height:1.8; }
+.fav-empty .btn{ display:inline-flex; }
 .fav-card{
   background:var(--surface);
   border:1px solid var(--paper-line);

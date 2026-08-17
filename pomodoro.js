@@ -217,6 +217,11 @@
       const secs = Math.floor(remaining % 60).toString().padStart(2, "0");
       els.liveTime.textContent = `${mins}:${secs}`;
 
+      const totalSec = durationMin * 60;
+      const pct = totalSec > 0 ? Math.round(((totalSec - remaining) / totalSec) * 100) : 0;
+      const fillEl = document.getElementById("pomoLiveFill");
+      if (fillEl) fillEl.style.width = pct + "%";
+
       if (mode === "pomodoro") {
         els.liveIcon.textContent = "🍅";
         els.liveTitle.textContent = "Pomodoro شغّال";

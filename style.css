@@ -1450,43 +1450,76 @@ a:focus-visible, button:focus-visible{
   z-index:90;
   max-width:900px;
   margin:10px auto 0;
-  padding:11px 13px;
+  padding:12px 14px 10px;
   display:none;
-  align-items:center;
-  gap:11px;
+  flex-direction:column;
+  gap:9px;
   background:var(--surface);
   border:1px solid var(--paper-line);
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(20,24,50,.13);
-  backdrop-filter:blur(14px);
+  border-radius:16px;
+  box-shadow:0 12px 34px rgba(20,24,50,.16);
+  backdrop-filter:blur(16px) saturate(140%);
+  overflow:hidden;
 }
-.pomo-live-banner.show{display:flex; animation:pomoBannerIn .28s ease-out;}
+.pomo-live-banner::before{
+  content:"";
+  position:absolute; inset:0 0 auto 0; height:3px;
+  background:linear-gradient(90deg, var(--gold), #E9C97A);
+  opacity:.9;
+}
+.pomo-live-banner.show{display:flex; animation:pomoBannerIn .3s cubic-bezier(.2,.8,.2,1);}
+.pomo-live-row{ display:flex; align-items:center; gap:11px; }
 .pomo-live-icon{
-  width:38px;height:38px;border-radius:12px;
+  position:relative;
+  width:40px;height:40px;border-radius:13px;
   display:grid;place-items:center;
-  background:var(--gold); color:var(--ink);
+  background:linear-gradient(145deg, var(--gold), #C9822B);
+  color:var(--ink);
   font-size:20px; flex-shrink:0;
+  box-shadow:0 4px 10px rgba(217,164,65,.35);
+}
+.pomo-live-icon::after{
+  content:"";
+  position:absolute; top:-2px; right:-2px;
+  width:9px; height:9px; border-radius:50%;
+  background:#3F9D5C; border:2px solid var(--surface);
+  animation:pomoLivePulse 1.6s ease-in-out infinite;
 }
 .pomo-live-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:1px;}
-.pomo-live-info strong{font-size:.86rem;color:var(--ink);}
+.pomo-live-info strong{font-size:.85rem;color:var(--ink); font-family:'Tajawal',sans-serif; font-weight:800;}
 .pomo-live-info span{font-size:.72rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .pomo-live-time{
   font-family:'IBM Plex Mono',monospace;
-  font-weight:800;font-size:1rem;min-width:60px;text-align:center;color:var(--ink);
+  font-weight:800;font-size:1.05rem;min-width:60px;text-align:center;color:var(--ink);
+  flex-shrink:0;
 }
 .pomo-live-action{
   border:0;border-radius:11px!important;
   background:#DA5A4A!important;color:#fff!important;
-  width:38px;height:38px;padding:0!important;
+  width:36px;height:36px;padding:0!important;
   display:grid;place-items:center;cursor:pointer;
+  flex-shrink:0;
+  transition:transform .15s ease, box-shadow .15s ease;
 }
-[data-theme="dark"] .pomo-live-banner{box-shadow:0 10px 30px rgba(0,0,0,.35);}
-@keyframes pomoBannerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.pomo-live-action:hover{ transform:scale(1.08); box-shadow:0 4px 12px rgba(218,90,74,.4); }
+.pomo-live-track{
+  height:5px; border-radius:20px;
+  background:var(--paper-line); overflow:hidden;
+}
+.pomo-live-fill{
+  height:100%; border-radius:20px;
+  background:linear-gradient(90deg, var(--gold), #E9C97A);
+  width:0%;
+  transition:width 1s linear;
+}
+[data-theme="dark"] .pomo-live-banner{box-shadow:0 12px 34px rgba(0,0,0,.4);}
+@keyframes pomoBannerIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes pomoLivePulse{0%,100%{box-shadow:0 0 0 0 rgba(63,157,92,.55);}50%{box-shadow:0 0 0 4px rgba(63,157,92,0);}}
 @media(max-width:600px){
-  .pomo-live-banner{margin:7px 12px 0;top:6px;padding:9px 10px;border-radius:15px;}
-  .pomo-live-icon{width:34px;height:34px;border-radius:10px;font-size:17px;}
-  .pomo-live-time{font-size:.9rem;min-width:55px;}
-  .pomo-live-action{width:34px;height:34px;}
+  .pomo-live-banner{margin:7px 12px 0;top:6px;padding:10px 12px 9px;border-radius:14px;}
+  .pomo-live-icon{width:36px;height:36px;border-radius:11px;font-size:18px;}
+  .pomo-live-time{font-size:.92rem;min-width:52px;}
+  .pomo-live-action{width:32px;height:32px;}
 }
 
 

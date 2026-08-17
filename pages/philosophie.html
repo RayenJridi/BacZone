@@ -45,6 +45,7 @@
     <nav>
       <a href="../index.html">Accueil</a>
       <a href="../matieres.html" class="active">Matières</a>
+      <a href="/BacZone/pomodoro.html">🍅 Pomodoro</a>
       <a href="/BacZone/favoris.html">⭐ Favoris</a>
       <a href="../contact.html">Contact</a>
       <button type="button" class="nav-install-btn" id="navInstallBtn">📲 تثبيت</button>
@@ -53,6 +54,18 @@
   </div>
 </header>
 <div class="wn-banner" id="whatsNewBanner"></div>
+<div class="pomo-live-banner" id="pomoLiveBanner" aria-live="polite" aria-hidden="true">
+  <div class="pomo-live-row">
+    <div class="pomo-live-icon" id="pomoLiveIcon">🍅</div>
+    <div class="pomo-live-info">
+      <strong id="pomoLiveTitle">Pomodoro</strong>
+      <span id="pomoLiveSubject">Mathématiques</span>
+    </div>
+    <div class="pomo-live-time" id="pomoLiveTime">25:00</div>
+    <button type="button" id="pomoLiveAction" aria-label="إيقاف الجلسة">⏹</button>
+  </div>
+  <div class="pomo-live-track"><div class="pomo-live-fill" id="pomoLiveFill"></div></div>
+</div>
 
 
 <section class="subject-hero" style="--accent:#6B4A34">

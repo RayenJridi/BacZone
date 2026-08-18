@@ -1472,19 +1472,40 @@ img{max-width:100%;}
     background:var(--brand-ink);
     flex-direction:column;
     padding:10px 24px 18px;
-    display:none;
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height .32s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
   }
-  .site-header nav.open{display:flex;}
+  .site-header nav.open{max-height:480px; opacity:1;}
   .menu-toggle{
-    display:block;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px;
+    width:34px; height:34px;
     background:none; border:none;
-    color:var(--on-dark);
-    font-size:1.4rem;
     cursor:pointer;
+    padding:0;
   }
+  .menu-toggle .bar{
+    display:block;
+    width:22px; height:2px;
+    border-radius:2px;
+    background:var(--on-dark);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1), opacity .2s ease;
+  }
+  .menu-toggle.open .bar:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .menu-toggle.open .bar:nth-child(2){ opacity:0; }
+  .menu-toggle.open .bar:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 }
 
 /* focus visibility */
+button:not(:disabled):active,
+.btn:active,
+.tab:active,
+.fav-btn:active{
+  transform:scale(.96);
+}
+
 a:focus-visible, button:focus-visible{
   outline:2px solid var(--gold);
   outline-offset:2px;
@@ -1617,9 +1638,8 @@ iframe,video,canvas,svg{max-width:100%}
   .brand{gap:6px;align-items:center;min-width:0}
   .brand .mark{font-size:1.25rem;white-space:nowrap}
   .brand .tagline{display:none}
-  .menu-toggle{display:block;flex:0 0 auto;font-size:1.45rem;padding:6px 8px;line-height:1}
-  .site-header nav{
-    top:100%;left:0;right:0;
+  .menu-toggle{padding:6px; width:32px; height:32px;}
+  .site-header nav.open{
     padding:8px 14px 14px;
     gap:3px;
     border-top:1px solid rgba(255,255,255,.08);
@@ -1747,9 +1767,6 @@ iframe,video,canvas,svg{max-width:100%}
   .goal-ring{width:78px;height:78px;flex-basis:78px}
   .pomo-subjects{grid-template-columns:1fr}
 }
-
-
-/* ============================================================
    BacZone — Visual Polish v6
    Premium UI layer inspired by the BacZone reference mockup.
    No JavaScript or feature behavior is changed.
@@ -2233,3 +2250,15 @@ body{
   }
 }
 
+
+/* ---------- تصحيح توافق: نخلي أيقونة ☰ المتحركة (3 خطوط ↔ X) تبقى خدامة بعد Visual Polish v6 ---------- */
+@media (max-width:640px){
+  .menu-toggle{
+    padding:0 !important;
+    display:flex !important;
+    flex-direction:column; align-items:center; justify-content:center;
+    gap:5px;
+    width:34px; height:34px;
+    font-size:0 !important;
+  }
+}

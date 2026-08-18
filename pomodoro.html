@@ -14,6 +14,13 @@
 <title>Pomodoro — BacZone</title>
 <meta name="description" content="تايمر بومودورو مربوط بمواد الباكالوريا التقنية — ركّز 25 دقيقة، راقب وقت المراجعة تاعك يوم بيوم، بلا تسجيل وبلا إنترنت.">
 <link rel="canonical" href="https://RayenJridi.github.io/BacZone/pomodoro.html">
+<meta property="og:title" content="Pomodoro — BacZone">
+<meta property="og:description" content="تايمر Pomodoro مربوط بمواد الباكالوريا التقنية — راجع بتركيز وتابع تقدمك يوم بيوم.">
+<meta property="og:image" content="https://RayenJridi.github.io/BacZone/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://RayenJridi.github.io/BacZone/og-image.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/BacZone/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/BacZone/icons/favicon-16.png">
 <link rel="manifest" href="/BacZone/manifest.json">
@@ -21,7 +28,6 @@
 <link rel="apple-touch-icon" href="/BacZone/icons/icon-192.png">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="style.css">
-<!-- BacZone Visual Polish v6 -->
 </head>
 <body>
 
@@ -31,7 +37,7 @@
       <span class="mark">Bac<span>Zone</span></span>
       <span class="tagline">Bac Technique · تونس</span>
     </div>
-    <button class="menu-toggle" aria-label="القائمة" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <button class="menu-toggle" id="menuToggleBtn" aria-label="القائمة" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
     <nav>
       <a href="index.html">الرئيسية</a>
       <a href="matieres.html">المواد</a>

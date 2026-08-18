@@ -12,6 +12,32 @@
   const FAV_KEY = "baczone_favorites_v1";
   const THEME_KEY = "baczone_theme"; // "light" | "dark" | absent = يتبع النظام
 
+  // ---------- -1) قائمة الموبايل (☰ ↔ ✕ + سكر بالكبسة برا) ----------
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("menuToggleBtn");
+    const nav = document.querySelector(".site-header nav");
+    if (!btn || !nav) return;
+
+    function closeMenu() {
+      nav.classList.remove("open");
+      btn.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    }
+    function toggleMenu() {
+      const willOpen = !nav.classList.contains("open");
+      nav.classList.toggle("open", willOpen);
+      btn.classList.toggle("open", willOpen);
+      btn.setAttribute("aria-expanded", String(willOpen));
+    }
+
+    btn.addEventListener("click", (e) => { e.stopPropagation(); toggleMenu(); });
+    document.addEventListener("click", (e) => {
+      if (nav.classList.contains("open") && !nav.contains(e.target) && e.target !== btn) closeMenu();
+    });
+    nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+  });
+
   // ---------- 0) Theme toggle (التطبيق المبكر قبل الرسم موجود في <head> كل صفحة) ----------
   function systemPrefersDark() {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;

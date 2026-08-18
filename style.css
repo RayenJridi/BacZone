@@ -387,13 +387,6 @@ img{max-width:100%;}
 }
 .chapter.hidden, .res-item.hidden{display:none;}
 
-.res-item.video .go{
-  background:var(--accent, var(--gold));
-  color:var(--on-dark);
-  padding:5px 12px;
-  border-radius:20px;
-}
-
 /* ---------- info note (bidi-safe) ---------- */
 .info-note{
   max-width:1080px;
@@ -460,6 +453,36 @@ img{max-width:100%;}
   font-size:.86rem;
   line-height:1.9;
   color:var(--ink-soft);
+}
+
+/* ---------- back to top ---------- */
+.back-to-top{
+  position:fixed;
+  bottom:22px;
+  left:18px;
+  z-index:80;
+  width:46px; height:46px;
+  border-radius:50%;
+  background:var(--brand-ink, var(--ink));
+  color:var(--gold);
+  border:1px solid rgba(224,168,58,.35);
+  font-size:1.15rem;
+  cursor:pointer;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(14px) scale(.85);
+  transition:opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1), visibility .25s;
+}
+.back-to-top.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+.back-to-top:hover{ transform:translateY(-3px) scale(1.06); box-shadow:0 12px 28px rgba(0,0,0,.32); }
+.back-to-top:active{ transform:scale(.92); }
+@media (max-width:640px){
+  .back-to-top{ left:14px; bottom:18px; width:42px; height:42px; font-size:1.05rem; }
 }
 
 /* ---------- reassurance verse ---------- */
@@ -591,9 +614,21 @@ img{max-width:100%;}
 .res-item .go{
   font-family:'IBM Plex Mono',monospace;
   font-size:.72rem;
-  color:var(--accent, var(--gold));
+  font-weight:700;
+  color:#fff;
+  background:var(--accent, var(--gold));
   white-space:nowrap;
+  padding:7px 14px;
+  border-radius:20px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+  transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
 }
+.res-item .go:hover{ transform:translateY(-2px); box-shadow:0 5px 14px rgba(0,0,0,.22); filter:brightness(1.08); }
+.res-item .go:active{ transform:translateY(0) scale(.96); }
 .res-item.placeholder{
   border-left-style:dashed;
   color:#8A8FA9;

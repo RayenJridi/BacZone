@@ -1,4 +1,4 @@
-const CACHE_NAME = 'baczone-v23';
+const CACHE_NAME = 'baczone-v24';
 const CORE_ASSETS = [
   '/BacZone/index.html',
   '/BacZone/matieres.html',

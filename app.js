@@ -12,6 +12,22 @@
   const FAV_KEY = "baczone_favorites_v1";
   const THEME_KEY = "baczone_theme"; // "light" | "dark" | absent = يتبع النظام
 
+  // ---------- -2) زر "رجوع لفوق" ----------
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("backToTopBtn");
+    if (!btn) return;
+
+    function toggleBtn() {
+      btn.classList.toggle("show", window.scrollY > 420);
+    }
+    window.addEventListener("scroll", toggleBtn, { passive: true });
+    toggleBtn();
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
   // ---------- -1) قائمة الموبايل (☰ ↔ ✕ + سكر بالكبسة برا) ----------
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menuToggleBtn");
@@ -215,6 +231,14 @@
   // قائمة مركزية بآخر التحديثات — نزيدها إحنا يدوي كل مرة نزيد محتوى.
   // "date" = آخر تاريخ تحديث في هاذ الدفعة، يتحسب مع آخر تاريخ شافو الطالب.
   const WHATS_NEW = [
+    {
+      date: "2026-08-18",
+      items: [
+        "📚 ملخصات جديدة في Génie Électrique و Mécanique",
+        "🔝 زر «رجوع لفوق» في كل صفحات المواد",
+        "🎨 زر PDF أوضح وأسهل للضغط",
+      ],
+    },
     {
       date: "2026-08-17",
       items: [

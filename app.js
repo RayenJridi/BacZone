@@ -317,6 +317,20 @@
 
   document.addEventListener("DOMContentLoaded", injectStarButtons);
 
+  // ---------- 4.5) الصف كامل قابل للضغط (مش الزر الصغير بس) ----------
+  // كي تكبس فأي مكان في res-item (حتى النص الزخرفي زي ▶️)، يفتح الرابط مباشرة.
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".res-item:not(.placeholder)").forEach((li) => {
+      li.addEventListener("click", (e) => {
+        if (e.target.closest(".fav-btn")) return; // ما نأثروش على زر المفضلة
+        if (e.target.closest("a.go")) return; // الرابط نفسو يخدم عادي
+        const link = li.querySelector("a.go");
+        if (link) window.open(link.href, "_blank", "noopener");
+      });
+      li.style.cursor = "pointer";
+    });
+  });
+
   // نعرضها عالميا باش صفحة favoris.html تنجم تستعملها
   window.BacZoneFav = { getFavorites, saveFavorites, toggleFavorite, isFavorited };
 

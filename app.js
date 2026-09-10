@@ -234,6 +234,7 @@
     {
       date: "2026-09-08",
       items: [
+        "🔢 Additionneur و Comparateur: سلاسل + تصحيحات جديدة في Génie Électrique",
         "⚡ Amplificateur: Cours + Séries + Correction جدد في Génie Électrique",
       ],
     },

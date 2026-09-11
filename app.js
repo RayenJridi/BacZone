@@ -232,6 +232,13 @@
   // "date" = آخر تاريخ تحديث في هاذ الدفعة، يتحسب مع آخر تاريخ شافو الطالب.
   const WHATS_NEW = [
     {
+      date: "2026-09-10",
+      items: [
+        "🔌 Multiplexeur/DMux: سلاسل + تصحيحات جديدة في Génie Électrique",
+        "⚡ Condensateur و Dipôle RC: دروس، سلاسل وتصحيحات منظمة في Physique",
+      ],
+    },
+    {
       date: "2026-09-08",
       items: [
         "🔢 Additionneur و Comparateur: سلاسل + تصحيحات جديدة في Génie Électrique",

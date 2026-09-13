@@ -235,7 +235,6 @@
       date: "2026-09-10",
       items: [
         "🔌 Multiplexeur/DMux: سلاسل + تصحيحات جديدة في Génie Électrique",
-        "⚡ Condensateur و Dipôle RC: دروس، سلاسل وتصحيحات منظمة في Physique",
       ],
     },
     {
